@@ -1,6 +1,7 @@
 package com.androidapp.beconnect.beconnect;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -35,6 +36,15 @@ public class RegisterActivity extends AppCompatActivity {
         etPassword               = (EditText) findViewById(R.id.etPassword);
         etPassword_confirmation  = (EditText) findViewById(R.id.etPassword_confirmation);
         bRegister                = (Button)   findViewById(R.id.bRegister);
+        tvLoginLink              = (TextView) findViewById(R.id.tvLoginLink);
+
+        tvLoginLink.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent loginIntent = new Intent(RegisterActivity.this, LoginActivity.class);
+                RegisterActivity.this.startActivity(loginIntent);
+            }
+        });
 
         bRegister.setOnClickListener(new View.OnClickListener() {
             @Override
