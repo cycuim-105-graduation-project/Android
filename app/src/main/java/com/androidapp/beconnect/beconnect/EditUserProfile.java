@@ -1,15 +1,19 @@
 package com.androidapp.beconnect.beconnect;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.androidapp.beconnect.beconnect.app.AppController;
 
 import org.json.JSONException;
@@ -36,6 +40,7 @@ public class EditUserProfile extends AppCompatActivity {
     SessionManager session;
 
     String url_validate_token;
+    String url_edit_user_profile;
     String tag_string_req = "string_req";
 
     @Override
@@ -57,6 +62,7 @@ public class EditUserProfile extends AppCompatActivity {
         bEdit            = (Button)   findViewById(R.id.bEdit);
 
         url_validate_token    = getResources().getString(R.string.url_validate_token);
+        url_edit_user_profile = getResources().getString(R.string.url_edit_user_profile);
 
         session = new SessionManager(getApplicationContext());
 
@@ -67,7 +73,6 @@ public class EditUserProfile extends AppCompatActivity {
         final String uid          = user.get(SessionManager.KEY_UID);
         final String access_token = user.get(SessionManager.KEY_ACCESS_TOKEN);
         final String client       = user.get(SessionManager.KEY_CLIENT);
-        final String content_type = user.get(SessionManager.KEY_CONTENT_TYPE);
 
         JsonObjectRequest jor = new JsonObjectRequest(url_validate_token, null, new Response.Listener<JSONObject>() {
             @Override
@@ -106,5 +111,59 @@ public class EditUserProfile extends AppCompatActivity {
 
         AppController.getInstance().addToRequestQueue(jor, tag_string_req);
 
+        bEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final String nickname        = etNickname.getText().toString();
+                final String firstname       = etFirstname.getText().toString();
+                final String lastname        = etLastname.getText().toString();
+                final String cellphone       = etCellphone.getText().toString();
+                final String zipcode         = etZipcode.getText().toString();
+                final String address         = etAddress.getText().toString();
+                final String company         = etAddress.getText().toString();
+                final String company_address = etCompanyAddress.getText().toString();
+                final String job_title       = etJobTitle.getText().toString();
+
+                StringRequest sr = new StringRequest(Request.Method.PUT, url_edit_user_profile , new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Toast.makeText(EditUserProfile.this, "Update success", Toast.LENGTH_LONG).show();
+                        Intent UserProfileIntent = new Intent(EditUserProfile.this, ProfileActivity.class);
+                        EditUserProfile.this.startActivity(UserProfileIntent);
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(EditUserProfile.this, error.toString(), Toast.LENGTH_LONG).show();
+                    }
+                }){
+
+                    @Override
+                    protected Map<String, String> getParams() {
+                        Map<String, String> params = new HashMap<>();
+                        params.put("nickname",        nickname);
+                        params.put("firstname",       firstname);
+                        params.put("lastname",        lastname);
+                        params.put("cellphone",       cellphone);
+                        params.put("zipcode",         zipcode);
+                        params.put("address",         address);
+                        params.put("company",         company);
+                        params.put("company_address", company_address);
+                        params.put("job_title",       job_title);
+
+                        return params;
+                    }
+                    @Override
+                    public Map<String, String> getHeaders() {
+                        Map<String, String> params = new HashMap<>();
+                        params.put("uid",          uid);
+                        params.put("client",       client);
+                        params.put("access-token", access_token);
+                        return params;
+                    }
+                };
+                AppController.getInstance().addToRequestQueue(sr, tag_string_req);
+            }
+        });
     }
 }
