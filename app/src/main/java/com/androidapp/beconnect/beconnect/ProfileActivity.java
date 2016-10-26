@@ -2,13 +2,16 @@ package com.androidapp.beconnect.beconnect;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.androidapp.beconnect.beconnect.app.AppController;
 
 import org.json.JSONException;
@@ -36,6 +39,7 @@ public class ProfileActivity extends AppCompatActivity {
 
     SessionManager session;
     String url_validate_token;
+    String url_logout;
     String tag_string_req = "string_req";
 
     @Override
@@ -59,6 +63,7 @@ public class ProfileActivity extends AppCompatActivity {
         bLogout          = (Button)   findViewById(R.id.bLogout);
 
         url_validate_token = getResources().getString(R.string.url_validate_token);
+        url_logout         = getResources().getString(R.string.url_logout);
 
         session = new SessionManager(getApplicationContext());
 
@@ -107,5 +112,38 @@ public class ProfileActivity extends AppCompatActivity {
 
         AppController.getInstance().addToRequestQueue(jor, tag_string_req);
 
+        bLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                StringRequest sr = new StringRequest(Request.Method.DELETE, url_logout,
+                        new Response.Listener<String>()
+                        {
+                            @Override
+                            public void onResponse(String response) {
+                                Toast.makeText(ProfileActivity.this, "Logout success!", Toast.LENGTH_LONG).show();
+                                session.logoutUser();
+                            }
+
+                        },
+                        new Response.ErrorListener()
+                        {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                Toast.makeText(ProfileActivity.this, error.toString(), Toast.LENGTH_LONG).show();
+                            }
+                        }){
+                    @Override
+                    public Map<String, String> getHeaders() {
+                        Map<String, String> params = new HashMap<>();
+                        params.put("access-token", access_token);
+                        params.put("uid",          uid);
+                        params.put("client",       client);
+
+                        return params;
+                    }
+                };
+                AppController.getInstance().addToRequestQueue(sr, tag_string_req);
+            }
+        });
     }
 }
