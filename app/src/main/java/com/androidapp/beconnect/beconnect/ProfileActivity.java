@@ -1,5 +1,6 @@
 package com.androidapp.beconnect.beconnect;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -111,6 +112,22 @@ public class ProfileActivity extends AppCompatActivity {
         };
 
         AppController.getInstance().addToRequestQueue(jor, tag_string_req);
+
+        bEditProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent EditUserProfileIntent = new Intent(ProfileActivity.this, EditUserProfile.class);
+                ProfileActivity.this.startActivity(EditUserProfileIntent);
+            }
+        });
+
+        bEditPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent EditUserPasswordIntent = new Intent(ProfileActivity.this, EditPassword.class);
+                ProfileActivity.this.startActivity(EditUserPasswordIntent);
+            }
+        });
 
         bLogout.setOnClickListener(new View.OnClickListener() {
             @Override
