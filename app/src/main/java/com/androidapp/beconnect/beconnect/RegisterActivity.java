@@ -11,11 +11,16 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.androidapp.beconnect.beconnect.app.AppController;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -91,7 +96,14 @@ public class RegisterActivity extends AppCompatActivity {
                     }, new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            Toast.makeText(RegisterActivity.this, error.toString(), Toast.LENGTH_LONG).show();
+                            String json;
+                            NetworkResponse response = error.networkResponse;
+                            if(response != null && response.data != null){
+                                json = new String(response.data);
+                                String errors = trimMessage(json);
+
+                                Toast.makeText(RegisterActivity.this, errors, Toast.LENGTH_LONG).show();
+                            }
                         }
                     }){
 
@@ -127,6 +139,20 @@ public class RegisterActivity extends AppCompatActivity {
     }
     public boolean validatePasswordConfirmation(String password, String password_confirmation) {
         return (password.equals(password_confirmation));
+    }
+
+    public String trimMessage(String json){
+        String trimmedString = null;
+
+        try {
+            JSONObject obj = new JSONObject(json);
+            JSONObject err = obj.getJSONObject("errors");
+            JSONArray  arr = err.getJSONArray("full_messages");
+            trimmedString  = arr.toString(0).replace("[", "").replace("]", "").replace("\"", "").trim();
+        } catch(JSONException e) {
+            e.printStackTrace();
+        }
+        return trimmedString;
     }
 
 }

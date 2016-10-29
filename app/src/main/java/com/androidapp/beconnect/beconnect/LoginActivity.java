@@ -20,6 +20,10 @@ import com.android.volley.toolbox.HttpHeaderParser;
 import com.android.volley.toolbox.StringRequest;
 import com.androidapp.beconnect.beconnect.app.AppController;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
@@ -65,7 +69,7 @@ public class LoginActivity extends AppCompatActivity {
 
         bLogin.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(final View v) {
                 final String email    =    etEmail.getText().toString();
                 final String password = etPassword.getText().toString();
 
@@ -88,8 +92,14 @@ public class LoginActivity extends AppCompatActivity {
                     }, new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            Toast.makeText(LoginActivity.this, error.toString(), Toast.LENGTH_LONG).show();
-                            Log.d("onErrorResponse: ", error.toString());
+                            String json;
+                            NetworkResponse response = error.networkResponse;
+                            if(response != null && response.data != null){
+                                json = new String(response.data);
+                                String errors = trimMessage(json);
+
+                                Toast.makeText(LoginActivity.this, errors, Toast.LENGTH_LONG).show();
+                            }
                         }
                     }){
                         @Override
@@ -113,6 +123,8 @@ public class LoginActivity extends AppCompatActivity {
                                 uid          = response.headers.get("uid");
 
                                 session.createLoginSession(uid, access_token, client);
+
+                                Log.d("parseNetworkResponse: ", jsonString);
 
                             } catch (UnsupportedEncodingException e) {
                                 jsonString = new String(response.data);
@@ -143,6 +155,19 @@ public class LoginActivity extends AppCompatActivity {
 
     public boolean validatePassword(String password) {
         return password.length() > 5;
+    }
+
+    public String trimMessage(String json){
+        String trimmedString = null;
+
+        try {
+            JSONObject obj = new JSONObject(json);
+            JSONArray arr  = obj.getJSONArray("errors");
+            trimmedString  = arr.toString().replace("[", "").replace("]", "").replace("\"", "");
+        } catch(JSONException e) {
+            e.printStackTrace();
+        }
+        return trimmedString;
     }
 
 }
