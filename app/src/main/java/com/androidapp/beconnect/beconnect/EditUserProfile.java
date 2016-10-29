@@ -120,7 +120,7 @@ public class EditUserProfile extends AppCompatActivity {
                 final String cellphone       = etCellphone.getText().toString();
                 final String zipcode         = etZipcode.getText().toString();
                 final String address         = etAddress.getText().toString();
-                final String company         = etAddress.getText().toString();
+                final String company         = etCompany.getText().toString();
                 final String company_address = etCompanyAddress.getText().toString();
                 final String job_title       = etJobTitle.getText().toString();
 
