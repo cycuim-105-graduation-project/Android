@@ -24,7 +24,7 @@ public class Events extends AppCompatActivity {
         bEventDetail1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent EditBusinessCard1Intent = new Intent(Events.this, MainActivity.class);
+                Intent EditBusinessCard1Intent = new Intent(Events.this, EventDetails.class);
                 Events.this.startActivity(EditBusinessCard1Intent);
             }
         });
@@ -33,7 +33,7 @@ public class Events extends AppCompatActivity {
         bEventDetail2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent EditBusinessCard2Intent = new Intent(Events.this, MainActivity.class);
+                Intent EditBusinessCard2Intent = new Intent(Events.this, EventDetails.class);
                 Events.this.startActivity(EditBusinessCard2Intent);
             }
         });
@@ -42,7 +42,7 @@ public class Events extends AppCompatActivity {
         bEventDetail3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent EditBusinessCard3Intent = new Intent(Events.this, MainActivity.class);
+                Intent EditBusinessCard3Intent = new Intent(Events.this, EventDetails.class);
                 Events.this.startActivity(EditBusinessCard3Intent);
             }
         });
@@ -51,7 +51,7 @@ public class Events extends AppCompatActivity {
         bEventDetail4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent EditBusinessCard4Intent = new Intent(Events.this, MainActivity.class);
+                Intent EditBusinessCard4Intent = new Intent(Events.this, EventDetails.class);
                 Events.this.startActivity(EditBusinessCard4Intent);
             }
         });
@@ -60,7 +60,7 @@ public class Events extends AppCompatActivity {
         bEventDetail5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent EditBusinessCard5Intent = new Intent(Events.this, MainActivity.class);
+                Intent EditBusinessCard5Intent = new Intent(Events.this, EventDetails.class);
                 Events.this.startActivity(EditBusinessCard5Intent);
             }
         });
