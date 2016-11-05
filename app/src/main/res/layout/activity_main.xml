@@ -15,4 +15,16 @@
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         android:text="Login"/>
+    <Button
+        android:id="@+id/bBusinessCard"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_below="@id/bLogin"
+        android:text="Business"/>
+    <Button
+        android:id="@+id/bEvents"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_below="@id/bBusinessCard"
+        android:text="Events"/>
 </RelativeLayout>

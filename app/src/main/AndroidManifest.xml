@@ -22,6 +22,9 @@
         <activity android:name=".RegisterActivity" />
         <activity android:name=".ProfileActivity" />
         <activity android:name=".EditUserProfile" />
+        <activity android:name=".BusinessCard" />
+        <activity android:name=".EditBusinessCard" />
+        <activity android:name=".Events" />
         <activity android:name=".EditPassword"></activity>
     </application>
 

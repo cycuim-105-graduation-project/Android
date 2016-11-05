@@ -8,6 +8,174 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.androidapp.beconnect.beconnect.EditBusinessCard">
+    tools:context="com.androidapp.beconnect.beconnect.EditUserProfile">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/ic_menu_camera"
+                android:id="@+id/iBusinessCard"
+                android:layout_alignParentTop="true"
+                android:alpha="0.5"
+                android:layout_gravity="center_horizontal"/>
+
+            <LinearLayout
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent">
+                <TextView
+                    android:id="@+id/tvIdentity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Identity"
+                    android:textAppearance="?android:textAppearanceLarge"/>
+                <TextView
+                    android:id="@+id/tvEmail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:text="Email" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/llNickname"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:paddingTop="16dp"
+                android:paddingBottom="16dp">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:text="Nickname" />
+
+                <EditText
+                    android:id="@+id/etNickname"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:text="Nickname"
+                    android:layout_weight="2" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/llName"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:paddingTop="16dp"
+                android:paddingBottom="16dp">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:text="Name" />
+
+                <EditText
+                    android:id="@+id/etLastname"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Lastname"
+                    android:layout_weight="3.5" />
+                <EditText
+                    android:id="@+id/etFirstname"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Firstname"
+                    android:layout_weight="3.5" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/llCellphone"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:paddingTop="16dp"
+                android:paddingBottom="16dp">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:text="Cellphone" />
+                <EditText
+                    android:id="@+id/etCellphone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Cellphone"
+                    android:layout_weight="2" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/llAddress"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:paddingTop="16dp"
+                android:paddingBottom="16dp">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:text="Address" />
+
+                <EditText
+                    android:id="@+id/etAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Address"
+                    android:layout_weight="2" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/llCompany"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:paddingTop="16dp"
+                android:paddingBottom="16dp">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:text="Company" />
+
+                <EditText
+                    android:id="@+id/etCompany"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Company"
+                    android:layout_weight="2" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/llJobTitle"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:paddingTop="16dp"
+                android:paddingBottom="16dp"
+                android:layout_below="@+id/llFirsrname">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:text="Job Title" />
+
+                <EditText
+                    android:id="@+id/etJobTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="JobTitle"
+                    android:layout_weight="2" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/bEdit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/llJobTitle"
+                android:text="Edit" />
+
+        </LinearLayout>
+
+    </ScrollView>
 
 </RelativeLayout>

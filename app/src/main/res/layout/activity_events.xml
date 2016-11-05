@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_events"
     android:layout_width="match_parent"
@@ -9,5 +10,200 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.androidapp.beconnect.beconnect.Events">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/ic_menu_camera"
+                android:id="@+id/iEvent"
+                android:layout_alignParentTop="true"
+                android:alpha="0.5"
+                android:layout_gravity="center_horizontal"/>
+
+            <TextView
+                android:text="EventName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tvEventName1"
+                android:gravity="center"
+                android:textAppearance="?android:textAppearanceLarge"/>
+
+            <TextView
+                android:text="EventDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tvEventDescription1"
+                android:gravity="center"
+                android:textAppearance="?android:textAppearanceMedium"/>
+
+            <Button
+                android:text="Learn More"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/bEventDetail1"
+                android:layout_gravity="center_horizontal"/>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/llEvent2">
+
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/ic_menu_camera"
+                    android:id="@+id/iEvent2"
+                    android:layout_alignParentTop="true"
+                    android:alpha="0.5"
+                    android:layout_gravity="center_horizontal"/>
+
+                <TextView
+                    android:text="EventName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tvEventName2"
+                    android:gravity="center"
+                    android:textAppearance="?android:textAppearanceLarge"/>
+
+                <TextView
+                    android:text="EventDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tvEventDescription2"
+                    android:gravity="center"
+                    android:textAppearance="?android:textAppearanceMedium"/>
+                <Button
+                    android:text="Learn More"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/bEventDetail2"
+                    android:layout_gravity="center_horizontal"/>
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/llEvent3">
+
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/ic_menu_camera"
+                    android:id="@+id/iEvent3"
+                    android:layout_alignParentTop="true"
+                    android:alpha="0.5"
+                    android:layout_gravity="center_horizontal"/>
+
+                <TextView
+                    android:text="EventName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tvEventName3"
+                    android:gravity="center"
+                    android:textAppearance="?android:textAppearanceLarge"/>
+
+                <TextView
+                    android:text="EventDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tvEventDescription3"
+                    android:gravity="center"
+                    android:textAppearance="?android:textAppearanceMedium"/>
+                <Button
+                    android:text="Learn More"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/bEventDetail3"
+                    android:layout_gravity="center_horizontal"/>
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/llEvent4">
+
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/ic_menu_camera"
+                    android:id="@+id/iEvent4"
+                    android:layout_alignParentTop="true"
+                    android:alpha="0.5"
+                    android:layout_gravity="center_horizontal"/>
+
+                <TextView
+                    android:text="EventName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tvEventName4"
+                    android:gravity="center"
+                    android:textAppearance="?android:textAppearanceLarge"/>
+
+                <TextView
+                    android:text="EventDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tvEventDescription4"
+                    android:gravity="center"
+                    android:textAppearance="?android:textAppearanceMedium"/>
+                <Button
+                    android:text="Learn More"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/bEventDetail4"
+                    android:layout_gravity="center_horizontal"/>
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/llEvent5">
+
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/ic_menu_camera"
+                    android:id="@+id/iEvent5"
+                    android:layout_alignParentTop="true"
+                    android:alpha="0.5"
+                    android:layout_gravity="center_horizontal"/>
+
+                <TextView
+                    android:text="EventName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tvEventName5"
+                    android:gravity="center"
+                    android:textAppearance="?android:textAppearanceLarge"/>
+
+                <TextView
+                    android:text="EventDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tvEventDescription5"
+                    android:gravity="center"
+                    android:textAppearance="?android:textAppearanceMedium"/>
+                <Button
+                    android:text="Learn More"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/bEventDetail5"
+                    android:layout_gravity="center_horizontal"/>
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
 
 </RelativeLayout>
