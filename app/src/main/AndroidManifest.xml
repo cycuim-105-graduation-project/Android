@@ -25,7 +25,8 @@
         <activity android:name=".BusinessCard" />
         <activity android:name=".EditBusinessCard" />
         <activity android:name=".Events" />
-        <activity android:name=".EditPassword"></activity>
+        <activity android:name=".EditPassword" />
+        <activity android:name=".Ticket"></activity>
     </application>
 
 </manifest>

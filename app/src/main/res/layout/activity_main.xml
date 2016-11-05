@@ -22,9 +22,15 @@
         android:layout_below="@id/bLogin"
         android:text="Business"/>
     <Button
-        android:id="@+id/bEvents"
+    android:id="@+id/bEvents"
+    android:layout_height="wrap_content"
+    android:layout_width="wrap_content"
+    android:layout_below="@id/bBusinessCard"
+    android:text="Events"/>
+    <Button
+        android:id="@+id/bTicket"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:layout_below="@id/bBusinessCard"
-        android:text="Events"/>
+        android:layout_below="@id/bEvents"
+        android:text="Ticket"/>
 </RelativeLayout>
