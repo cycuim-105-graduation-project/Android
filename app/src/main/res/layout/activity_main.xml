@@ -33,4 +33,10 @@
         android:layout_width="160dp"
         android:layout_below="@id/bEvents"
         android:text="Ticket"/>
+    <Button
+        android:id="@+id/bNews"
+        android:layout_height="wrap_content"
+        android:layout_width="160dp"
+        android:layout_below="@id/bTicket"
+        android:text="News"/>
 </RelativeLayout>

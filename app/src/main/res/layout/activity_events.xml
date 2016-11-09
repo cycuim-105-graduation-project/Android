@@ -21,7 +21,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="@color/Card2">
+            android:background="@color/Card2"
+            android:paddingTop="16dp">
 
             <ImageView
                 android:layout_width="100dp"
@@ -60,7 +61,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/llEvent2"
-                android:background="@color/Card1">
+                android:background="@color/Card1"
+                android:paddingTop="16dp">
 
                 <ImageView
                     android:layout_width="100dp"
@@ -99,7 +101,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/llEvent3"
-                android:background="@color/Card2">
+                android:background="@color/Card2"
+                android:paddingTop="16dp">
 
                 <ImageView
                     android:layout_width="100dp"
@@ -138,7 +141,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/llEvent4"
-                android:background="@color/Card1">
+                android:background="@color/Card1"
+                android:paddingTop="16dp">
 
                 <ImageView
                     android:layout_width="100dp"
@@ -176,7 +180,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/llEvent5"
-                android:background="@color/Card2">
+                android:background="@color/Card2"
+                android:paddingTop="16dp">
 
                 <ImageView
                     android:layout_width="100dp"

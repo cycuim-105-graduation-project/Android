@@ -12,6 +12,7 @@ public class MainActivity extends AppCompatActivity {
     Button bBusinessCard;
     Button bEvents;
     Button bTicket;
+    Button bNews;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +55,15 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent TicketIntent = new Intent(MainActivity.this, Ticket.class);
                 MainActivity.this.startActivity(TicketIntent);
+            }
+        });
+        bNews = (Button) findViewById(R.id.bNews);
+
+        bNews.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent NewsIntent = new Intent(MainActivity.this, News.class);
+                MainActivity.this.startActivity(NewsIntent);
             }
         });
     }
