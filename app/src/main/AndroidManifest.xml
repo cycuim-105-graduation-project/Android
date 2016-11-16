@@ -28,7 +28,8 @@
         <activity android:name=".EditPassword" />
         <activity android:name=".Ticket" />
         <activity android:name=".EventDetails" />
-        <activity android:name=".News"></activity>
+        <activity android:name=".News" />
+        <activity android:name=".NewsDetails"></activity>
     </application>
 
 </manifest>

@@ -12,7 +12,9 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -26,12 +28,25 @@
                 android:layout_height="match_parent"
                 android:paddingBottom="16dp">
 
-                <TextView
-                    android:text="消息標題"
+                <LinearLayout
+                    android:orientation="horizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/tvTitle1"
-                    android:textStyle="normal|bold" />
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:text="消息標題"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/tvTitle1"
+                        android:textStyle="normal|bold"
+                        android:layout_weight="1" />
+
+                    <Button
+                        android:text="Learn more"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/bDetails1" />
+                </LinearLayout>
 
                 <TextView
                     android:text="消息內容：2016 年美國大選結果，唐納川普贏得總統大選，共和黨贏得了美國參議院多數席次..."
@@ -55,13 +70,26 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1">
 
-                    <TextView
-                        android:text="消息標題"
+                    <LinearLayout
+                        android:orientation="horizontal"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/tvTitle2"
-                        android:layout_weight="1"
-                        android:textStyle="normal|bold"/>
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
+
+                        <TextView
+                            android:text="消息標題"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/tvTitle2"
+                            android:layout_weight="1"
+                            android:textStyle="normal|bold"/>
+
+                        <Button
+                            android:text="Learn more"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/bDetails2" />
+                    </LinearLayout>
 
                     <TextView
                         android:text="消息內容"
@@ -85,12 +113,25 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
-                    <TextView
-                        android:text="消息標題"
+                    <LinearLayout
+                        android:orientation="horizontal"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/tvTitle3"
-                        android:textStyle="normal|bold"/>
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:text="消息標題"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/tvTitle3"
+                            android:textStyle="normal|bold"
+                            android:layout_weight="1" />
+
+                        <Button
+                            android:text="Learn more"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/bDetails3" />
+                    </LinearLayout>
 
                     <TextView
                         android:text="消息內容"
@@ -113,12 +154,25 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
-                    <TextView
-                        android:text="消息標題"
+                    <LinearLayout
+                        android:orientation="horizontal"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/tvTitle4"
-                        android:textStyle="normal|bold"/>
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:text="消息標題"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/tvTitle4"
+                            android:textStyle="normal|bold"
+                            android:layout_weight="1" />
+
+                        <Button
+                            android:text="Learn more"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/bDetails4" />
+                    </LinearLayout>
 
                     <TextView
                         android:text="消息內容"
@@ -141,12 +195,25 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
-                    <TextView
-                        android:text="消息標題"
+                    <LinearLayout
+                        android:orientation="horizontal"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/tvTitle5"
-                        android:textStyle="normal|bold"/>
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:text="消息標題"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/tvTitle5"
+                            android:textStyle="normal|bold"
+                            android:layout_weight="1" />
+
+                        <Button
+                            android:text="Learn more"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/bDetails5" />
+                    </LinearLayout>
 
                     <TextView
                         android:text="消息內容"
@@ -169,12 +236,25 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
-                    <TextView
-                        android:text="消息標題"
+                    <LinearLayout
+                        android:orientation="horizontal"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/tvTitle6"
-                        android:textStyle="normal|bold"/>
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:text="消息標題"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/tvTitle6"
+                            android:textStyle="normal|bold"
+                            android:layout_weight="1" />
+
+                        <Button
+                            android:text="Learn more"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/bDetails6" />
+                    </LinearLayout>
 
                     <TextView
                         android:text="消息內容"
@@ -197,12 +277,25 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
-                    <TextView
-                        android:text="消息標題"
+                    <LinearLayout
+                        android:orientation="horizontal"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/tvTitle7"
-                        android:textStyle="normal|bold"/>
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:text="消息標題"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/tvTitle7"
+                            android:textStyle="normal|bold"
+                            android:layout_weight="1" />
+
+                        <Button
+                            android:text="Learn more"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/bDetails7" />
+                    </LinearLayout>
 
                     <TextView
                         android:text="消息內容"
@@ -225,12 +318,25 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
-                    <TextView
-                        android:text="消息標題"
+                    <LinearLayout
+                        android:orientation="horizontal"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/tvTitle8"
-                        android:textStyle="normal|bold"/>
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:text="消息標題"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/tvTitle8"
+                            android:textStyle="normal|bold"
+                            android:layout_weight="1" />
+
+                        <Button
+                            android:text="Learn more"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/bDetails8" />
+                    </LinearLayout>
 
                     <TextView
                         android:text="消息內容"
@@ -253,12 +359,25 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
-                    <TextView
-                        android:text="消息標題"
+                    <LinearLayout
+                        android:orientation="horizontal"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/tvTite9"
-                        android:textStyle="normal|bold"/>
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:text="消息標題"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/tvTite9"
+                            android:textStyle="normal|bold"
+                            android:layout_weight="1" />
+
+                        <Button
+                            android:text="Learn more"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/bDetails9" />
+                    </LinearLayout>
 
                     <TextView
                         android:text="消息內容"
@@ -281,12 +400,25 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
-                    <TextView
-                        android:text="消息標題"
+                    <LinearLayout
+                        android:orientation="horizontal"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/tvTitle10"
-                        android:textStyle="normal|bold"/>
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:text="消息標題"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/tvTitle10"
+                            android:textStyle="normal|bold"
+                            android:layout_weight="1" />
+
+                        <Button
+                            android:text="Learn more"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/bDetails10" />
+                    </LinearLayout>
 
                     <TextView
                         android:text="消息內容"

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_business_card"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.androidapp.beconnect.beconnect.ProfileActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingTop="70dp"
+            android:paddingBottom="70dp">
+
+            <ImageView
+                android:layout_width="160dp"
+                android:layout_height="130dp"
+                android:src="@drawable/ic_menu_camera"
+                android:id="@+id/iTicket"
+                android:layout_alignParentTop="true"
+                android:alpha="0.5"
+                android:layout_gravity="center_horizontal"/>
+
+            <TextView
+                android:id="@+id/tvIdentity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="大會公告"
+                android:layout_below="@id/iTicket"
+                android:gravity="center"
+                android:textAppearance="?android:textAppearanceLarge"/>
+
+            <LinearLayout
+                android:id="@+id/llDetails"
+                android:layout_height="wrap_content"
+                android:paddingTop="16dp"
+                android:paddingBottom="30dp"
+                android:layout_width="250dp"
+                android:layout_gravity="center_horizontal">
+
+                <TextView
+                    android:text="產生沒有意義的文章，供排版時填充版面用，但不會因為字義而左右版型的判斷。文字、標點符號出現機率大致符合台灣文章習慣。"
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/Details"
+                    android:layout_weight="2" />
+            </LinearLayout>
+
+
+            <Button
+                android:id="@+id/bOK"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/llOK"
+                android:text="Got it !" />
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</RelativeLayout>

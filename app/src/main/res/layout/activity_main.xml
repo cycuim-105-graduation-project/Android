@@ -1,42 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_main"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.androidapp.beconnect.beconnect.MainActivity">
+    android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/bLogin"
-        android:layout_height="wrap_content"
-        android:layout_width="160dp"
-        android:text="Login"/>
-    <Button
-        android:id="@+id/bBusinessCard"
-        android:layout_height="wrap_content"
-        android:layout_width="160dp"
-        android:layout_below="@id/bLogin"
-        android:text="BusinessCard"/>
-    <Button
-        android:id="@+id/bEvents"
-        android:layout_height="wrap_content"
-        android:layout_width="160dp"
-        android:layout_below="@id/bBusinessCard"
-        android:text="Events"/>
-    <Button
-        android:id="@+id/bTicket"
-        android:layout_height="wrap_content"
-        android:layout_width="160dp"
-        android:layout_below="@id/bEvents"
-        android:text="Ticket"/>
-    <Button
-        android:id="@+id/bNews"
-        android:layout_height="wrap_content"
-        android:layout_width="160dp"
-        android:layout_below="@id/bTicket"
-        android:text="News"/>
-</RelativeLayout>
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="android.support.design.widget.AppBarLayout$ScrollingViewBehavior">
+
+        <RelativeLayout
+            android:id="@+id/activity_main"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingBottom="@dimen/activity_vertical_margin"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:paddingTop="@dimen/activity_vertical_margin"
+            tools:context="com.androidapp.beconnect.beconnect.MainActivity">
+
+            <Button
+                android:id="@+id/bLogin"
+                android:layout_height="wrap_content"
+                android:layout_width="160dp"
+                android:text="Login" />
+
+            <Button
+                android:id="@+id/bBusinessCard"
+                android:layout_height="wrap_content"
+                android:layout_width="160dp"
+                android:layout_below="@id/bLogin"
+                android:text="BusinessCard" />
+
+            <Button
+                android:id="@+id/bEvents"
+                android:layout_height="wrap_content"
+                android:layout_width="160dp"
+                android:layout_below="@id/bBusinessCard"
+                android:text="Events" />
+
+            <Button
+                android:id="@+id/bTicket"
+                android:layout_height="wrap_content"
+                android:layout_width="160dp"
+                android:layout_below="@id/bEvents"
+                android:text="Ticket" />
+
+            <Button
+                android:id="@+id/bNews"
+                android:layout_height="wrap_content"
+                android:layout_width="160dp"
+                android:layout_below="@id/bTicket"
+                android:text="News" />
+        </RelativeLayout>
+    </android.support.v4.widget.NestedScrollView>
+
+</android.support.design.widget.CoordinatorLayout>
