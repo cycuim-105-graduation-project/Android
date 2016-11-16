@@ -31,7 +31,9 @@
                 <LinearLayout
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:paddingRight="10dp"
+                    android:paddingLeft="10dp">
 
                     <TextView
                         android:text="消息標題"
@@ -53,7 +55,17 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/tvContent1"
-                    android:contextClickable="false" />
+                    android:paddingRight="10dp"
+                    android:paddingLeft="10dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/background_floating_material_light"
+                android:paddingBottom="6dp">
 
             </LinearLayout>
 
@@ -74,7 +86,9 @@
                         android:orientation="horizontal"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_weight="1">
+                        android:layout_weight="1"
+                        android:paddingRight="10dp"
+                        android:paddingLeft="10dp">
 
                         <TextView
                             android:text="消息標題"
@@ -95,8 +109,19 @@
                         android:text="消息內容"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/tvContent2" />
+                        android:id="@+id/tvContent2"
+                        android:paddingRight="10dp"
+                        android:paddingLeft="10dp"/>
                 </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/background_floating_material_light"
+                android:paddingBottom="6dp">
 
             </LinearLayout>
 
@@ -116,7 +141,9 @@
                     <LinearLayout
                         android:orientation="horizontal"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        android:layout_height="match_parent"
+                        android:paddingRight="10dp"
+                        android:paddingLeft="10dp">
 
                         <TextView
                             android:text="消息標題"
@@ -137,8 +164,19 @@
                         android:text="消息內容"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/tvContent3" />
+                        android:id="@+id/tvContent3"
+                        android:paddingRight="10dp"
+                        android:paddingLeft="10dp"/>
                 </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/background_floating_material_light"
+                android:paddingBottom="6dp">
 
             </LinearLayout>
 
@@ -157,7 +195,9 @@
                     <LinearLayout
                         android:orientation="horizontal"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        android:layout_height="match_parent"
+                        android:paddingRight="10dp"
+                        android:paddingLeft="10dp">
 
                         <TextView
                             android:text="消息標題"
@@ -178,8 +218,19 @@
                         android:text="消息內容"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/tvContent4" />
+                        android:id="@+id/tvContent4"
+                        android:paddingRight="10dp"
+                        android:paddingLeft="10dp"/>
                 </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/background_floating_material_light"
+                android:paddingBottom="6dp">
 
             </LinearLayout>
 
@@ -198,7 +249,9 @@
                     <LinearLayout
                         android:orientation="horizontal"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        android:layout_height="match_parent"
+                        android:paddingRight="10dp"
+                        android:paddingLeft="10dp">
 
                         <TextView
                             android:text="消息標題"
@@ -219,8 +272,19 @@
                         android:text="消息內容"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/tvContent5" />
+                        android:id="@+id/tvContent5"
+                        android:paddingRight="10dp"
+                        android:paddingLeft="10dp"/>
                 </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/background_floating_material_light"
+                android:paddingBottom="6dp">
 
             </LinearLayout>
 
@@ -239,7 +303,9 @@
                     <LinearLayout
                         android:orientation="horizontal"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        android:layout_height="match_parent"
+                        android:paddingRight="10dp"
+                        android:paddingLeft="10dp">
 
                         <TextView
                             android:text="消息標題"
@@ -260,8 +326,19 @@
                         android:text="消息內容"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/tvContent6" />
+                        android:id="@+id/tvContent6"
+                        android:paddingRight="10dp"
+                        android:paddingLeft="10dp"/>
                 </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/background_floating_material_light"
+                android:paddingBottom="6dp">
 
             </LinearLayout>
 
@@ -280,7 +357,9 @@
                     <LinearLayout
                         android:orientation="horizontal"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        android:layout_height="match_parent"
+                        android:paddingRight="10dp"
+                        android:paddingLeft="10dp">
 
                         <TextView
                             android:text="消息標題"
@@ -301,8 +380,19 @@
                         android:text="消息內容"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/tvContent7" />
+                        android:id="@+id/tvContent7"
+                        android:paddingRight="10dp"
+                        android:paddingLeft="10dp"/>
                 </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/background_floating_material_light"
+                android:paddingBottom="6dp">
 
             </LinearLayout>
 
@@ -321,7 +411,9 @@
                     <LinearLayout
                         android:orientation="horizontal"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        android:layout_height="match_parent"
+                        android:paddingRight="10dp"
+                        android:paddingLeft="10dp">
 
                         <TextView
                             android:text="消息標題"
@@ -342,8 +434,19 @@
                         android:text="消息內容"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/tvContent8" />
+                        android:id="@+id/tvContent8"
+                        android:paddingRight="10dp"
+                        android:paddingLeft="10dp"/>
                 </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/background_floating_material_light"
+                android:paddingBottom="6dp">
 
             </LinearLayout>
 
@@ -362,7 +465,9 @@
                     <LinearLayout
                         android:orientation="horizontal"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        android:layout_height="match_parent"
+                        android:paddingRight="10dp"
+                        android:paddingLeft="10dp">
 
                         <TextView
                             android:text="消息標題"
@@ -383,8 +488,19 @@
                         android:text="消息內容"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/tvContent9" />
+                        android:id="@+id/tvContent9"
+                        android:paddingRight="10dp"
+                        android:paddingLeft="10dp"/>
                 </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/background_floating_material_light"
+                android:paddingBottom="6dp">
 
             </LinearLayout>
 
@@ -403,7 +519,9 @@
                     <LinearLayout
                         android:orientation="horizontal"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        android:layout_height="match_parent"
+                        android:paddingRight="10dp"
+                        android:paddingLeft="10dp">
 
                         <TextView
                             android:text="消息標題"
@@ -424,7 +542,9 @@
                         android:text="消息內容"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/tvContent10" />
+                        android:id="@+id/tvContent10"
+                        android:paddingRight="10dp"
+                        android:paddingLeft="10dp"/>
                 </LinearLayout>
 
             </LinearLayout>

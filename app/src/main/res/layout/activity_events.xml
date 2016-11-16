@@ -42,19 +42,31 @@
                 android:textAppearance="?android:textAppearanceLarge"/>
 
             <TextView
-                android:text="EventDescription"
-                android:layout_width="match_parent"
+                android:text="2016 年美國大選結果，唐納川普贏得總統大選，共和黨..."
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/tvEventDescription1"
                 android:gravity="center"
-                android:textAppearance="?android:textAppearanceMedium"/>
+                android:textAppearance="?android:textAppearanceMedium"
+                android:paddingRight="30dp"
+                android:paddingLeft="30dp"
+                android:paddingTop="6dp"/>
 
             <Button
                 android:text="Learn More"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/bEventDetail1"
-                android:layout_gravity="center_horizontal"/>
+                android:layout_gravity="center_horizontal" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/background_floating_material_light"
+                android:paddingBottom="6dp">
+
+            </LinearLayout>
 
             <LinearLayout
                 android:orientation="vertical"
@@ -87,13 +99,25 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/tvEventDescription2"
                     android:gravity="center"
-                    android:textAppearance="?android:textAppearanceMedium"/>
+                    android:textAppearance="?android:textAppearanceMedium"
+                    android:paddingRight="30dp"
+                    android:paddingLeft="30dp"
+                    android:paddingTop="6dp"/>
                 <Button
                     android:text="Learn More"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/bEventDetail2"
                     android:layout_gravity="center_horizontal"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/background_floating_material_light"
+                android:paddingBottom="6dp">
+
             </LinearLayout>
 
             <LinearLayout
@@ -127,13 +151,25 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/tvEventDescription3"
                     android:gravity="center"
-                    android:textAppearance="?android:textAppearanceMedium"/>
+                    android:textAppearance="?android:textAppearanceMedium"
+                    android:paddingRight="30dp"
+                    android:paddingLeft="30dp"
+                    android:paddingTop="6dp"/>
                 <Button
                     android:text="Learn More"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/bEventDetail3"
                     android:layout_gravity="center_horizontal"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/background_floating_material_light"
+                android:paddingBottom="6dp">
+
             </LinearLayout>
 
             <LinearLayout
@@ -167,7 +203,10 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/tvEventDescription4"
                     android:gravity="center"
-                    android:textAppearance="?android:textAppearanceMedium"/>
+                    android:textAppearance="?android:textAppearanceMedium"
+                    android:paddingRight="30dp"
+                    android:paddingLeft="30dp"
+                    android:paddingTop="6dp"/>
                 <Button
                     android:text="Learn More"
                     android:layout_width="wrap_content"
@@ -175,6 +214,16 @@
                     android:id="@+id/bEventDetail4"
                     android:layout_gravity="center_horizontal"/>
             </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/background_floating_material_light"
+                android:paddingBottom="6dp">
+
+            </LinearLayout>
+
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"
@@ -206,7 +255,10 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/tvEventDescription5"
                     android:gravity="center"
-                    android:textAppearance="?android:textAppearanceMedium"/>
+                    android:textAppearance="?android:textAppearanceMedium"
+                    android:paddingRight="30dp"
+                    android:paddingLeft="30dp"
+                    android:paddingTop="6dp"/>
                 <Button
                     android:text="Learn More"
                     android:layout_width="wrap_content"
