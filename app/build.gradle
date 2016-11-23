@@ -1,8 +1,8 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 24
-    buildToolsVersion "24.0.3"
+    compileSdkVersion 23
+    buildToolsVersion "23.0.2"
     defaultConfig {
         applicationId "com.androidapp.beconnect.beconnect"
         minSdkVersion 22
@@ -19,8 +19,14 @@ android {
     }
 }
 
+repositories {
+    maven {
+        url '../repo'
+    }
+}
+
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
@@ -28,5 +34,6 @@ dependencies {
     compile 'com.android.support:support-v4:22.2.1'
     compile 'com.android.support:design:22.2.1'
     compile 'com.android.volley:volley:1.0.0'
+    compile 'io.onebeacon:onebeacon-android:1.0.24'
     testCompile 'junit:junit:4.12'
 }
