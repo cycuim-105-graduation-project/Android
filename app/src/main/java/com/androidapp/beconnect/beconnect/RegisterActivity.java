@@ -1,5 +1,6 @@
 package com.androidapp.beconnect.beconnect;
 
+import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -28,6 +29,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class RegisterActivity extends AppCompatActivity {
+
+    private BluetoothAdapter mBluetoothAdapter;
+    private static final int REQUEST_ENABLE_BT = 1;
 
     private EditText etIdentity;
     private EditText etEmail;
@@ -121,6 +125,24 @@ public class RegisterActivity extends AppCompatActivity {
                 }
             }
         });
+
+        mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+
+        // 檢查是否有可用的藍牙裝置
+        if (mBluetoothAdapter == null) {
+            // 若無可用裝置時執行
+            Toast.makeText(this, "Bluetooth not supported on this Device", Toast.LENGTH_SHORT).show();
+            finish();
+            return;
+        }
+
+        // 如果藍牙目前不可用，請求使用者開啟藍芽功能。
+        if (!mBluetoothAdapter.isEnabled()) {
+            if (!mBluetoothAdapter.isEnabled()) {
+                Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+                startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
+            }
+        }
     }
     private void hideKeyboard() {
         View view = getCurrentFocus();
@@ -153,6 +175,20 @@ public class RegisterActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         return trimmedString;
+    }
+
+    // 使用onActivityResult 接收其他 Activity回傳的資料
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // 接收請求開啟藍芽功能的結果
+        if (requestCode == 1 && resultCode == RESULT_OK) {
+            // 使用者授權藍牙後執行
+            Toast.makeText(this, "使用者已授權藍牙使用", Toast.LENGTH_SHORT).show();
+        } else if (requestCode == 1 && resultCode == RESULT_CANCELED) {
+            // 使用者拒絕授權藍牙後執行
+            Toast.makeText(this, "使用者拒絕授權藍牙使用", Toast.LENGTH_SHORT).show();
+            finish();
+            return;
+        }
     }
 
 }
