@@ -23,6 +23,8 @@
         <activity android:name=".ProfileActivity" />
         <activity android:name=".EditUserProfile" />
         <activity android:name=".EditPassword"></activity>
+
+        <service android:name=".MonitorService"/>
     </application>
 
 </manifest>
