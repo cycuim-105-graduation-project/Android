@@ -11,6 +11,19 @@ import io.onebeacon.api.spec.EddystoneUIDBeacon;
 /** Example subclass for a BeaconsMonitor **/
 class MyBeaconsMonitor extends BeaconsMonitor {
 
+    EddystoneUIDBeacon EddystoneBeacon;
+    int id;
+
+    // 不可變 ID
+    String  namespaceId;
+    String  instanceId;
+    String  advertisedIdString;
+
+    // 距離
+    float  averageRssi;
+    float  EstimatedDistance;
+    String rangeName;
+
     public MyBeaconsMonitor(Context context) {
         super(context);
     }
@@ -25,12 +38,17 @@ class MyBeaconsMonitor extends BeaconsMonitor {
     protected void onBeaconChangedRssi(Beacon beacon) {
         super.onBeaconChangedRssi(beacon);
         if (beacon.getType() == Beacon.Type.EDDYSTONE_UID) {
-            EddystoneUIDBeacon Eddystone_Beacon = (EddystoneUIDBeacon) beacon;
-            int id = Eddystone_Beacon.getId();
-            float rssi = Eddystone_Beacon.getAverageRssi();
+            EddystoneBeacon    = (EddystoneUIDBeacon) beacon;
+            id                 = EddystoneBeacon.getId();
+            namespaceId        = EddystoneBeacon.getNamespaceId();
 
-            Log.d("rssi: ", String.valueOf(rssi));
+            // EddystoneBeacon.getInstanceId() 沒有給我正確的 instance，從 address 自己撈
+            instanceId         = EddystoneBeacon.getPrettyAddress().replace(":", "").toLowerCase();
+            advertisedIdString = namespaceId.concat(instanceId);
 
+            averageRssi        = EddystoneBeacon.getAverageRssi();
+            EstimatedDistance  = EddystoneBeacon.getEstimatedDistance();
+            rangeName          = EddystoneBeacon.getRangeName();
         }
     }
 
@@ -38,18 +56,14 @@ class MyBeaconsMonitor extends BeaconsMonitor {
     protected void onBeaconAdded(Beacon beacon) {
         super.onBeaconAdded(beacon);
         if (beacon.getType() == Beacon.Type.EDDYSTONE_UID) {
-            // example usage for an iBeacon
-//            Apple_iBeacon iBeacon = (Apple_iBeacon) beacon;
-//            int maj = iBeacon.getMajor();
-//            int min = iBeacon.getMinor();
-//            UUID uuid = iBeacon.getUUID();
-//
-//            log(String.format("{%s}/%d/%d new iBeacon found: %s", uuid, maj, min, beacon));
+            EddystoneBeacon    = (EddystoneUIDBeacon) beacon;
+            namespaceId        = EddystoneBeacon.getNamespaceId();
+            instanceId         = EddystoneBeacon.getPrettyAddress();
+
         }
 
         // see Beacon.Type.* for more types, and io.onebeacon.api.spec.* for beacon type interfaces
     }
-
     // checkout the other available callbacks in the BeaconsManager base class
 
     private void log(String msg) {
