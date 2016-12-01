@@ -1,7 +1,11 @@
 package com.androidapp.beconnect.beconnect;
 
 import android.content.Context;
+import android.util.Base64;
 import android.util.Log;
+
+import org.apache.commons.codec.DecoderException;
+import org.apache.commons.codec.binary.Hex;
 
 import io.onebeacon.api.Beacon;
 import io.onebeacon.api.BeaconsMonitor;
@@ -18,6 +22,8 @@ class MyBeaconsMonitor extends BeaconsMonitor {
     String  namespaceId;
     String  instanceId;
     String  advertisedIdString;
+    byte[]  advertisedIdHex;
+    String  advertisedId;
 
     // 距離
     float  averageRssi;
@@ -49,6 +55,9 @@ class MyBeaconsMonitor extends BeaconsMonitor {
             averageRssi        = EddystoneBeacon.getAverageRssi();
             EstimatedDistance  = EddystoneBeacon.getEstimatedDistance();
             rangeName          = EddystoneBeacon.getRangeName();
+
+            getEncodeAdvertisedId(advertisedIdString);
+
         }
     }
 
@@ -64,7 +73,21 @@ class MyBeaconsMonitor extends BeaconsMonitor {
 
         // see Beacon.Type.* for more types, and io.onebeacon.api.spec.* for beacon type interfaces
     }
+
     // checkout the other available callbacks in the BeaconsManager base class
+
+    //TODO 取得 encode advertisedId
+    public String getEncodeAdvertisedId(String string) {
+
+        try {
+            advertisedIdHex = Hex.decodeHex(string.toCharArray());
+            advertisedId    = Base64.encodeToString(advertisedIdHex, Base64.DEFAULT);
+            Log.d("advertisedId: ", advertisedId);
+        } catch (DecoderException e) {
+            e.printStackTrace();
+        }
+        return advertisedIdString;
+    }
 
     private void log(String msg) {
         Log.d("MonitorService", msg);
