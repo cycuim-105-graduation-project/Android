@@ -2,8 +2,21 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.androidapp.beconnect.beconnect">
 
-    <uses-permission android:name="android.permission.BLUETOOTH" />
-    <uses-permission android:name="android.permission.INTERNET" />
+    <!-- Bluetooth permissions and features -->
+    <uses-permission android:name="android.permission.BLUETOOTH"/>
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
+
+    <uses-feature
+        android:name="android.hardware.bluetooth_le"
+        android:required="true"/>
+
+    <!-- Permissions to fetch user data over network, contact the proximity beacon service,
+         and access location -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.NETWORK"/>
+    <uses-permission android:name="android.permission.USE_CREDENTIALS"/>
 
     <application
         android:name=".app.AppController"
@@ -12,6 +25,12 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+        <!-- Required for the Static Maps API used here to display the registered location
+             of the beacon -->
+        <meta-data android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyA_W8xwSrbhchbxDuDp5ce2TsxO99qThvk"/>
+
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -30,7 +49,9 @@
         <activity android:name=".Ticket" />
         <activity android:name=".EventDetails" />
         <activity android:name=".News" />
-        <activity android:name=".NewsDetails"></activity>
+        <activity android:name=".NewsDetails" />
+
+        <service android:name=".MonitorService"/>
     </application>
 
 </manifest>
