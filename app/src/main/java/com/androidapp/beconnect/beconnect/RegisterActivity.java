@@ -11,6 +11,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.view.MenuInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
@@ -189,6 +192,43 @@ public class RegisterActivity extends AppCompatActivity {
             finish();
             return;
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId()) {
+            case R.id.mLogin:
+                Intent Loginintent = new Intent(this, LoginActivity.class);
+                this.startActivity(Loginintent);
+                break;
+            case R.id.mBusinessCard:
+                Intent BusinessCardintent = new Intent(this, BusinessCard.class);
+                this.startActivity(BusinessCardintent);
+                break;
+            case R.id.mEvents:
+                Intent Eventsintent = new Intent(this, Events.class);
+                this.startActivity(Eventsintent);
+                break;
+            case R.id.mTicket:
+                Intent Ticketintent = new Intent(this, Ticket.class);
+                this.startActivity(Ticketintent);
+                break;
+            case R.id.mNews:
+                Intent Newsintent = new Intent(this, News.class);
+                this.startActivity(Newsintent);
+                break;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+
+        return true;
     }
 
 }
