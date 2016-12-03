@@ -1,13 +1,11 @@
 package com.androidapp.beconnect.beconnect;
 
 import android.bluetooth.BluetoothAdapter;
-import android.Manifest;
 import android.content.ComponentName;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.pm.PackageManager;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.support.v7.app.AlertDialog;
@@ -103,10 +101,11 @@ public class MainActivity extends AppCompatActivity implements ServiceConnection
             if (!mBluetoothAdapter.isEnabled()) {
                 Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
                 startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
-                if (!bindService(new Intent(this, MonitorService.class), (ServiceConnection) this, BIND_AUTO_CREATE)) {
-                    setTitle("Bind failed! Manifest?");
-                }
             }
+        }
+
+        if (!bindService(new Intent(this, MonitorService.class), (ServiceConnection) this, BIND_AUTO_CREATE)) {
+            setTitle("Bind failed! Manifest?");
         }
 
         // 要使用者權限 (for Android 6.0 後)
