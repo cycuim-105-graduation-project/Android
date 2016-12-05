@@ -11,7 +11,7 @@ import android.view.MenuInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class Ticket extends AppCompatActivity {
+public class TicketTwo extends AppCompatActivity {
 
     private BluetoothAdapter mBluetoothAdapter;
     private static final int REQUEST_ENABLE_BT = 1;
@@ -21,15 +21,15 @@ public class Ticket extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_ticket);
+        setContentView(R.layout.activity_ticket_two);
 
         bOKTicket = (Button) findViewById(R.id.bOKTicket);
 
         bOKTicket.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent EditBusinessCardIntent = new Intent(Ticket.this, MainActivity.class);
-                Ticket.this.startActivity(EditBusinessCardIntent);
+                Intent EditBusinessCardIntent = new Intent(TicketTwo.this, MainActivity.class);
+                TicketTwo.this.startActivity(EditBusinessCardIntent);
             }
         });
 
@@ -89,7 +89,7 @@ public class Ticket extends AppCompatActivity {
                 this.startActivity(Eventsintent);
                 break;
             case R.id.mTicket:
-                Intent Ticketintent = new Intent(this, Ticket.class);
+                Intent Ticketintent = new Intent(this, TicketOne.class);
                 this.startActivity(Ticketintent);
                 break;
             case R.id.mNews:

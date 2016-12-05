@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
         bTicket.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent TicketIntent = new Intent(MainActivity.this, Ticket.class);
+                Intent TicketIntent = new Intent(MainActivity.this, TicketOne.class);
                 MainActivity.this.startActivity(TicketIntent);
             }
         });
@@ -138,7 +138,7 @@ public class MainActivity extends AppCompatActivity {
                 this.startActivity(Eventsintent);
                 break;
             case R.id.mTicket:
-                Intent Ticketintent = new Intent(this, Ticket.class);
+                Intent Ticketintent = new Intent(this, TicketOne.class);
                 this.startActivity(Ticketintent);
                 break;
             case R.id.mNews:

@@ -91,7 +91,7 @@ public class NewsDetails extends AppCompatActivity {
                 this.startActivity(Eventsintent);
                 break;
             case R.id.mTicket:
-                Intent Ticketintent = new Intent(this, Ticket.class);
+                Intent Ticketintent = new Intent(this, TicketOne.class);
                 this.startActivity(Ticketintent);
                 break;
             case R.id.mNews:

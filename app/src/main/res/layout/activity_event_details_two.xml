@@ -22,17 +22,17 @@
             <ImageView
                 android:layout_width="160dp"
                 android:layout_height="160dp"
-                android:src="@drawable/ic_menu_camera"
+                android:src="@drawable/woodworking"
                 android:id="@+id/iTicket"
                 android:layout_alignParentTop="true"
-                android:alpha="0.5"
+                android:alpha="0.8"
                 android:layout_gravity="center_horizontal"/>
 
             <TextView
                 android:id="@+id/tvIdentity"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="活動名稱"
+                android:text="生活木工小物創作"
                 android:layout_below="@id/iTicket"
                 android:gravity="center"
                 android:textAppearance="?android:textAppearanceLarge"/>
@@ -59,7 +59,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_alignParentRight="true"
-                    android:text="2016-12-17"
+                    android:text="2016-12-21"
                     android:layout_weight="1.5"
                     android:textSize="16sp" />
             </LinearLayout>
@@ -85,7 +85,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_alignParentRight="true"
-                    android:text="中原大學"
+                    android:text="中原大學 教學大樓"
                     android:layout_weight="1.5"
                     android:textSize="16sp" />
             </LinearLayout>
@@ -130,14 +130,14 @@
                     android:layout_alignParentStart="true"
                     android:layout_alignParentTop="true"
                     android:layout_weight="3.5"
-                    android:text="Address" />
+                    android:text="description" />
 
                 <TextView
                     android:id="@+id/tvEventDetails"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_alignParentRight="true"
-                    android:text="活動詳情敘述。活動詳情敘述。活動詳情敘述。活動詳情敘述。活動詳情敘述。活動詳情敘述。"
+                    android:text="使用老師精心為初學者挑選的日本工藝刀，學習基本的刨削，在記住訣竅、熟悉工具之後，順利的進行抹刀的外型加工。 請自備：乾淨棉布一條、耐磨手套壹付、鉛筆與橡皮擦。"
                     android:layout_weight="1.5"
                     android:textSize="16sp" />
             </LinearLayout>

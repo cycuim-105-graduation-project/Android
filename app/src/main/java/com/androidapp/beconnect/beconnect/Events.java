@@ -32,8 +32,8 @@ public class Events extends AppCompatActivity {
         bEventDetail1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent EditBusinessCard1Intent = new Intent(Events.this, EventDetails.class);
-                Events.this.startActivity(EditBusinessCard1Intent);
+                Intent EventDetail1Intent = new Intent(Events.this, EventDetailsOne.class);
+                Events.this.startActivity(EventDetail1Intent);
             }
         });
         bEventDetail2 = (Button) findViewById(R.id.bEventDetail2);
@@ -41,8 +41,8 @@ public class Events extends AppCompatActivity {
         bEventDetail2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent EditBusinessCard2Intent = new Intent(Events.this, EventDetails.class);
-                Events.this.startActivity(EditBusinessCard2Intent);
+                Intent EventDetail2Intent = new Intent(Events.this, EventDetailsTwo.class);
+                Events.this.startActivity(EventDetail2Intent);
             }
         });
         bEventDetail3 = (Button) findViewById(R.id.bEventDetail3);
@@ -50,8 +50,8 @@ public class Events extends AppCompatActivity {
         bEventDetail3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent EditBusinessCard3Intent = new Intent(Events.this, EventDetails.class);
-                Events.this.startActivity(EditBusinessCard3Intent);
+                Intent EventDetail3Intent = new Intent(Events.this, EventDetailsOne.class);
+                Events.this.startActivity(EventDetail3Intent);
             }
         });
         bEventDetail4 = (Button) findViewById(R.id.bEventDetail4);
@@ -59,8 +59,8 @@ public class Events extends AppCompatActivity {
         bEventDetail4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent EditBusinessCard4Intent = new Intent(Events.this, EventDetails.class);
-                Events.this.startActivity(EditBusinessCard4Intent);
+                Intent EventDetail4Intent = new Intent(Events.this, EventDetailsTwo.class);
+                Events.this.startActivity(EventDetail4Intent);
             }
         });
         bEventDetail5 = (Button) findViewById(R.id.bEventDetail5);
@@ -68,8 +68,8 @@ public class Events extends AppCompatActivity {
         bEventDetail5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent EditBusinessCard5Intent = new Intent(Events.this, EventDetails.class);
-                Events.this.startActivity(EditBusinessCard5Intent);
+                Intent EventDetail5Intent = new Intent(Events.this, EventDetailsOne.class);
+                Events.this.startActivity(EventDetail5Intent);
             }
         });
 
@@ -130,7 +130,7 @@ public class Events extends AppCompatActivity {
                 this.startActivity(Eventsintent);
                 break;
             case R.id.mTicket:
-                Intent Ticketintent = new Intent(this, Ticket.class);
+                Intent Ticketintent = new Intent(this, TicketOne.class);
                 this.startActivity(Ticketintent);
                 break;
             case R.id.mNews:

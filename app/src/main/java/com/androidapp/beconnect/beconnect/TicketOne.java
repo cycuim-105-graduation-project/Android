@@ -11,25 +11,25 @@ import android.view.MenuInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class EventDetails extends AppCompatActivity {
+public class TicketOne extends AppCompatActivity {
 
     private BluetoothAdapter mBluetoothAdapter;
     private static final int REQUEST_ENABLE_BT = 1;
 
-    Button bSignUp;
+    Button bOKTicket;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_event_details);
+        setContentView(R.layout.activity_ticket_one);
 
-        bSignUp = (Button) findViewById(R.id.bSignUp);
+        bOKTicket = (Button) findViewById(R.id.bOKTicket);
 
-        bSignUp.setOnClickListener(new View.OnClickListener() {
+        bOKTicket.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent EditBusinessCardIntent = new Intent(EventDetails.this, Ticket.class);
-                EventDetails.this.startActivity(EditBusinessCardIntent);
+                Intent EditBusinessCardIntent = new Intent(TicketOne.this, MainActivity.class);
+                TicketOne.this.startActivity(EditBusinessCardIntent);
             }
         });
 
@@ -50,7 +50,6 @@ public class EventDetails extends AppCompatActivity {
                 startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
             }
         }
-
     }
 
     // 使用onActivityResult 接收其他 Activity回傳的資料
@@ -90,7 +89,7 @@ public class EventDetails extends AppCompatActivity {
                 this.startActivity(Eventsintent);
                 break;
             case R.id.mTicket:
-                Intent Ticketintent = new Intent(this, Ticket.class);
+                Intent Ticketintent = new Intent(this, TicketOne.class);
                 this.startActivity(Ticketintent);
                 break;
             case R.id.mNews:

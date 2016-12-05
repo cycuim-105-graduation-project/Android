@@ -27,14 +27,14 @@
             <ImageView
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:src="@drawable/ic_menu_camera"
+                android:src="@drawable/japanese"
                 android:id="@+id/iEvent"
                 android:layout_alignParentTop="true"
-                android:alpha="0.5"
+                android:alpha="0.8"
                 android:layout_gravity="center_horizontal"/>
 
             <TextView
-                android:text="EventName"
+                android:text="初級日文體驗"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/tvEventName1"
@@ -42,7 +42,7 @@
                 android:textAppearance="?android:textAppearanceLarge"/>
 
             <TextView
-                android:text="2016 年美國大選結果，唐納川普贏得總統大選，共和黨..."
+                android:text="對日文有興趣的你，就從這裡踏出你的第一步吧！"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/tvEventDescription1"
@@ -79,14 +79,14 @@
                 <ImageView
                     android:layout_width="100dp"
                     android:layout_height="100dp"
-                    android:src="@drawable/ic_menu_camera"
+                    android:src="@drawable/woodworking"
                     android:id="@+id/iEvent2"
                     android:layout_alignParentTop="true"
-                    android:alpha="0.5"
+                    android:alpha="0.8"
                     android:layout_gravity="center_horizontal"/>
 
                 <TextView
-                    android:text="EventName"
+                    android:text="生活木工小物創作"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/tvEventName2"
@@ -94,7 +94,7 @@
                     android:textAppearance="?android:textAppearanceLarge"/>
 
                 <TextView
-                    android:text="EventDescription"
+                    android:text="學習如何描繪切割線，然後從最簡單的造型開始學習刨削、修飾、打磨。"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/tvEventDescription2"

@@ -22,10 +22,10 @@
             <ImageView
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:src="@drawable/ic_menu_camera"
+                android:src="@drawable/cat"
                 android:id="@+id/iBusinessCard"
                 android:layout_alignParentTop="true"
-                android:alpha="0.5"
+                android:alpha="0.8"
                 android:layout_gravity="center_horizontal"/>
 
             <LinearLayout
@@ -42,7 +42,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="16dp"
-                    android:text="Email" />
+                    android:text="love2082020@icloud.com" />
             </LinearLayout>
 
             <LinearLayout
@@ -64,7 +64,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
-                    android:text="Nickname"
+                    android:text="BB"
                     android:layout_weight="2" />
             </LinearLayout>
             <LinearLayout
@@ -85,13 +85,13 @@
                     android:id="@+id/etLastname"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Lastname"
+                    android:text="Zhang"
                     android:layout_weight="3.5" />
                 <EditText
                     android:id="@+id/etFirstname"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Firstname"
+                    android:text="Bihan"
                     android:layout_weight="3.5" />
             </LinearLayout>
             <LinearLayout
@@ -111,7 +111,7 @@
                     android:id="@+id/etCellphone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Cellphone"
+                    android:text="0912345678"
                     android:layout_weight="2" />
             </LinearLayout>
             <LinearLayout
@@ -132,7 +132,7 @@
                     android:id="@+id/etAddress"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Address"
+                    android:text="桃園市中壢區實踐路202號"
                     android:layout_weight="2" />
             </LinearLayout>
             <LinearLayout
@@ -153,7 +153,7 @@
                     android:id="@+id/etCompany"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Company"
+                    android:text="Be Connect"
                     android:layout_weight="2" />
             </LinearLayout>
             <LinearLayout
@@ -175,7 +175,7 @@
                     android:id="@+id/etJobTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="JobTitle"
+                    android:text="行銷顧問"
                     android:layout_weight="2" />
             </LinearLayout>
 

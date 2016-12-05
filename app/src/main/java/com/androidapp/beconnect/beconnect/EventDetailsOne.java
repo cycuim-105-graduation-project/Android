@@ -11,25 +11,25 @@ import android.view.MenuInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class EditBusinessCard extends AppCompatActivity {
+public class EventDetailsOne extends AppCompatActivity {
 
     private BluetoothAdapter mBluetoothAdapter;
     private static final int REQUEST_ENABLE_BT = 1;
 
-    Button bEdit;
+    Button bSignUp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit_business_card);
+        setContentView(R.layout.activity_event_details_one);
 
-        bEdit = (Button) findViewById(R.id.bEdit);
+        bSignUp = (Button) findViewById(R.id.bSignUp);
 
-        bEdit.setOnClickListener(new View.OnClickListener() {
+        bSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent EditIntent = new Intent(EditBusinessCard.this, BusinessCard.class);
-                EditBusinessCard.this.startActivity(EditIntent);
+                Intent EditBusinessCardIntent = new Intent(EventDetailsOne.this, TicketOne.class);
+                EventDetailsOne.this.startActivity(EditBusinessCardIntent);
             }
         });
 
@@ -52,7 +52,6 @@ public class EditBusinessCard extends AppCompatActivity {
         }
 
     }
-
 
     // 使用onActivityResult 接收其他 Activity回傳的資料
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
