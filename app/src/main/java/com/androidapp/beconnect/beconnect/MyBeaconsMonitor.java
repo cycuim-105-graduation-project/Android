@@ -57,7 +57,6 @@ class MyBeaconsMonitor extends BeaconsMonitor {
             rangeName          = EddystoneBeacon.getRangeName();
 
             getEncodeAdvertisedId(advertisedIdString);
-
         }
     }
 
@@ -82,10 +81,13 @@ class MyBeaconsMonitor extends BeaconsMonitor {
         try {
             advertisedIdHex = Hex.decodeHex(string.toCharArray());
             advertisedId    = Base64.encodeToString(advertisedIdHex, Base64.DEFAULT);
-            Log.d("advertisedId: ", advertisedId);
+
+            Values.ID.add(advertisedId);
+
         } catch (DecoderException e) {
             e.printStackTrace();
         }
+
         return advertisedIdString;
     }
 

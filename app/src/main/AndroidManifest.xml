@@ -26,11 +26,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <!-- Required for the Static Maps API used here to display the registered location
-             of the beacon -->
-        <meta-data android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyA_W8xwSrbhchbxDuDp5ce2TsxO99qThvk"/>
-
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
