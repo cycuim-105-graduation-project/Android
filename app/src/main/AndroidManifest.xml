@@ -41,11 +41,12 @@
         <activity android:name=".EditBusinessCard" />
         <activity android:name=".Events" />
         <activity android:name=".EditPassword" />
-        <activity android:name=".Ticket" />
-        <activity android:name=".EventDetails" />
         <activity android:name=".News" />
         <activity android:name=".NewsDetails" />
-
+        <activity android:name=".EventDetailsTwo" />
+        <activity android:name=".EventDetailsOne" />
+        <activity android:name=".TicketOne" />
+        <activity android:name=".TicketTwo" />
         <service android:name=".MonitorService"/>
     </application>
 

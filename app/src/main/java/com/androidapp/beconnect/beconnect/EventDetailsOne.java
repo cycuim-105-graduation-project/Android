@@ -2,44 +2,34 @@ package com.androidapp.beconnect.beconnect;
 
 import android.bluetooth.BluetoothAdapter;
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+import android.view.MenuInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 
-public class Events extends AppCompatActivity {
+public class EventDetailsOne extends AppCompatActivity {
 
     private BluetoothAdapter mBluetoothAdapter;
     private static final int REQUEST_ENABLE_BT = 1;
 
-    Button bEventDetail1;
-    Button bEventDetail2;
+    Button bSignUp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_events);
+        setContentView(R.layout.activity_event_details_one);
 
-        bEventDetail1 = (Button) findViewById(R.id.bEventDetail1);
+        bSignUp = (Button) findViewById(R.id.bSignUp);
 
-        bEventDetail1.setOnClickListener(new View.OnClickListener() {
+        bSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent EventDetail1Intent = new Intent(Events.this, EventDetailsOne.class);
-                Events.this.startActivity(EventDetail1Intent);
-            }
-        });
-        bEventDetail2 = (Button) findViewById(R.id.bEventDetail2);
-
-        bEventDetail2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent EventDetail2Intent = new Intent(Events.this, EventDetailsTwo.class);
-                Events.this.startActivity(EventDetail2Intent);
+                Intent EditBusinessCardIntent = new Intent(EventDetailsOne.this, TicketOne.class);
+                EventDetailsOne.this.startActivity(EditBusinessCardIntent);
             }
         });
 
@@ -114,4 +104,3 @@ public class Events extends AppCompatActivity {
         return true;
     }
 }
-

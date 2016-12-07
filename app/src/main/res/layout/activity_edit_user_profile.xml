@@ -22,10 +22,10 @@
             <ImageView
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:src="@drawable/ic_menu_camera"
+                android:src="@drawable/cat"
                 android:id="@+id/iProfile"
                 android:layout_alignParentTop="true"
-                android:alpha="0.5"
+                android:alpha="0.8"
                 android:layout_gravity="center_horizontal"/>
 
             <LinearLayout

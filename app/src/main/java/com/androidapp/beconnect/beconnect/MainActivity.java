@@ -11,9 +11,12 @@ import android.os.IBinder;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.MenuInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import io.onebeacon.api.OneBeacon;
 import io.onebeacon.api.ScanStrategy;
@@ -37,6 +40,7 @@ public class MainActivity extends AppCompatActivity implements ServiceConnection
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
 
         bLogin = (Button) findViewById(R.id.bLogin);
 
@@ -72,7 +76,7 @@ public class MainActivity extends AppCompatActivity implements ServiceConnection
         bTicket.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent TicketIntent = new Intent(MainActivity.this, Ticket.class);
+                Intent TicketIntent = new Intent(MainActivity.this, TicketOne.class);
                 MainActivity.this.startActivity(TicketIntent);
             }
         });
@@ -208,6 +212,45 @@ public class MainActivity extends AppCompatActivity implements ServiceConnection
             finish();
             return;
         }
+    }
+
+
+    //menu
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId()) {
+            case R.id.mLogin:
+                Intent Loginintent = new Intent(this, LoginActivity.class);
+                this.startActivity(Loginintent);
+                break;
+            case R.id.mBusinessCard:
+                Intent BusinessCardintent = new Intent(this, BusinessCard.class);
+                this.startActivity(BusinessCardintent);
+                break;
+            case R.id.mEvents:
+                Intent Eventsintent = new Intent(this, Events.class);
+                this.startActivity(Eventsintent);
+                break;
+            case R.id.mTicket:
+                Intent Ticketintent = new Intent(this, TicketOne.class);
+                this.startActivity(Ticketintent);
+                break;
+            case R.id.mNews:
+                Intent Newsintent = new Intent(this, News.class);
+                this.startActivity(Newsintent);
+                break;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+
+        return true;
     }
 
 }

@@ -14,6 +14,9 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.view.MenuInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import com.android.volley.NetworkResponse;
 import com.android.volley.ParseError;
@@ -227,15 +230,17 @@ public class News extends AppCompatActivity {
         private LayoutInflater myInflater;
         private List<Attachment> attachments;
 
-        public CustomAdapter(Context context, List<Attachment> attachment_list){
+        public CustomAdapter(Context context, List<Attachment> attachment_list) {
             myInflater = LayoutInflater.from(context);
             this.attachments = attachment_list;
         }
+
         /*private view holder class*/
         private class ViewHolder {
             TextView tvType;
             TextView tvData;
-            public ViewHolder(TextView type, TextView data){
+
+            public ViewHolder(TextView type, TextView data) {
                 this.tvType = type;
                 this.tvData = data;
             }
@@ -259,22 +264,58 @@ public class News extends AppCompatActivity {
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             ViewHolder holder = null;
-            if (convertView==null) {
+            if (convertView == null) {
                 convertView = myInflater.inflate(R.layout.activity_news_list_item, null);
                 holder = new ViewHolder(
-                    (TextView) convertView.findViewById(R.id.tvType),
-                    (TextView) convertView.findViewById(R.id.tvData)
+                        (TextView) convertView.findViewById(R.id.tvType),
+                        (TextView) convertView.findViewById(R.id.tvData)
                 );
                 convertView.setTag(holder);
             } else {
                 holder = (ViewHolder) convertView.getTag();
             }
 
-            Attachment Attachment = (Attachment)getItem(position);
+            Attachment Attachment = (Attachment) getItem(position);
             holder.tvType.setText(Attachment.getType());
             holder.tvData.setText(Attachment.getData());
 
             return convertView;
         }
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId()) {
+            case R.id.mLogin:
+                Intent Loginintent = new Intent(this, LoginActivity.class);
+                this.startActivity(Loginintent);
+                break;
+            case R.id.mBusinessCard:
+                Intent BusinessCardintent = new Intent(this, BusinessCard.class);
+                this.startActivity(BusinessCardintent);
+                break;
+            case R.id.mEvents:
+                Intent Eventsintent = new Intent(this, Events.class);
+                this.startActivity(Eventsintent);
+                break;
+            case R.id.mTicket:
+                Intent Ticketintent = new Intent(this, TicketOne.class);
+                this.startActivity(Ticketintent);
+                break;
+            case R.id.mNews:
+                Intent Newsintent = new Intent(this, News.class);
+                this.startActivity(Newsintent);
+                break;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+
+        return true;
     }
 }
