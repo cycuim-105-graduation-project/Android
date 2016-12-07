@@ -2,6 +2,7 @@ package com.androidapp.beconnect.beconnect;
 
 import android.bluetooth.BluetoothAdapter;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -25,13 +26,28 @@ public class TicketTwo extends AppCompatActivity {
 
         bOKTicket = (Button) findViewById(R.id.bOKTicket);
 
-        bOKTicket.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent EditBusinessCardIntent = new Intent(TicketTwo.this, MainActivity.class);
-                TicketTwo.this.startActivity(EditBusinessCardIntent);
-            }
-        });
+        if (Values.ifCheckIn[1] == true) {
+            bOKTicket.setText("已報到");
+            bOKTicket.setClickable(false);
+            bOKTicket.setBackgroundColor(Color.TRANSPARENT);
+            bOKTicket.setTextColor(Color.argb(100, 0, 0, 0));
+        } else if (Values.ifCheckIn[1] == false && Values.nodeInRange == true) {
+            bOKTicket.setText("報到");
+            Values.ifCheckIn[1] = true;
+            bOKTicket.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(TicketTwo.this, "報到成功，歡迎您！", Toast.LENGTH_SHORT).show();
+                    Intent MainActivityIntent = new Intent(TicketTwo.this, MainActivity.class);
+                    TicketTwo.this.startActivity(MainActivityIntent);
+                }
+            });
+        } else if (Values.ifCheckIn[1] == false && Values.nodeInRange == false) {
+            bOKTicket.setText("未在報到入口範圍內");
+            bOKTicket.setClickable(false);
+            bOKTicket.setBackgroundColor(Color.TRANSPARENT);
+            bOKTicket.setTextColor(Color.argb(100, 0, 0, 0));
+        }
 
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
 
