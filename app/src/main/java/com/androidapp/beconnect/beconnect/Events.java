@@ -2,14 +2,14 @@ package com.androidapp.beconnect.beconnect;
 
 import android.bluetooth.BluetoothAdapter;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
-import android.view.MenuInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 
 public class Events extends AppCompatActivity {
 
@@ -18,9 +18,6 @@ public class Events extends AppCompatActivity {
 
     Button bEventDetail1;
     Button bEventDetail2;
-    Button bEventDetail3;
-    Button bEventDetail4;
-    Button bEventDetail5;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,33 +40,6 @@ public class Events extends AppCompatActivity {
             public void onClick(View v) {
                 Intent EventDetail2Intent = new Intent(Events.this, EventDetailsTwo.class);
                 Events.this.startActivity(EventDetail2Intent);
-            }
-        });
-        bEventDetail3 = (Button) findViewById(R.id.bEventDetail3);
-
-        bEventDetail3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent EventDetail3Intent = new Intent(Events.this, EventDetailsOne.class);
-                Events.this.startActivity(EventDetail3Intent);
-            }
-        });
-        bEventDetail4 = (Button) findViewById(R.id.bEventDetail4);
-
-        bEventDetail4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent EventDetail4Intent = new Intent(Events.this, EventDetailsTwo.class);
-                Events.this.startActivity(EventDetail4Intent);
-            }
-        });
-        bEventDetail5 = (Button) findViewById(R.id.bEventDetail5);
-
-        bEventDetail5.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent EventDetail5Intent = new Intent(Events.this, EventDetailsOne.class);
-                Events.this.startActivity(EventDetail5Intent);
             }
         });
 

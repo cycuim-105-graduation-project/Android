@@ -5,10 +5,10 @@
     android:id="@+id/activity_events"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="8dp"
+    android:paddingLeft="8dp"
+    android:paddingRight="8dp"
+    android:paddingTop="8dp"
     tools:context="com.androidapp.beconnect.beconnect.Events">
 
     <ScrollView
@@ -18,256 +18,119 @@
         android:layout_alignParentStart="true">
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="@color/Card2"
-            android:paddingTop="16dp">
-
-            <ImageView
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:src="@drawable/japanese"
-                android:id="@+id/iEvent"
-                android:layout_alignParentTop="true"
-                android:alpha="0.8"
-                android:layout_gravity="center_horizontal"/>
-
-            <TextView
-                android:text="初級日文體驗"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/tvEventName1"
-                android:gravity="center"
-                android:textAppearance="?android:textAppearanceLarge"/>
-
-            <TextView
-                android:text="對日文有興趣的你，就從這裡踏出你的第一步吧！"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/tvEventDescription1"
-                android:gravity="center"
-                android:textAppearance="?android:textAppearanceMedium"
-                android:paddingRight="30dp"
-                android:paddingLeft="30dp"
-                android:paddingTop="6dp"/>
-
-            <Button
-                android:text="Learn More"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/bEventDetail1"
-                android:layout_gravity="center_horizontal" />
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
             <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/background_floating_material_light"
-                android:paddingBottom="6dp">
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="2dp"
+            android:paddingLeft="2dp"
+            android:paddingRight="2dp"
+            android:paddingBottom="3dp"
+            android:background="@drawable/shape">
 
-            </LinearLayout>
+            <ImageView
+                android:layout_width="match_parent"
+                android:src="@drawable/fakeimg1"
+                android:scaleType="centerCrop"
+                android:layout_height="180dp" />
 
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/llEvent2"
-                android:background="@color/Card1"
-                android:paddingTop="16dp">
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:paddingRight="20dp"
+                android:paddingLeft="20dp"
+                android:background="#fff">
 
-                <ImageView
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:src="@drawable/woodworking"
-                    android:id="@+id/iEvent2"
-                    android:layout_alignParentTop="true"
-                    android:alpha="0.8"
-                    android:layout_gravity="center_horizontal"/>
+                <TextView
+                    android:text="初級日文體驗"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textStyle="normal|bold"
+                    android:textSize="21sp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="5dp"/>
+
+                <TextView
+                    android:text="歡迎來到中原大學推廣教育中心！對日文有興趣的你，就從這裡踏出你的第一步吧！趕快來報名還享獨家優惠。"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="15sp"
+                    android:layout_marginBottom="5dp"/>
+
+                <Button
+                    android:id="@+id/bEventDetail1"
+                    android:text="more"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="15sp" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="10dp"
+                android:paddingLeft="2dp"
+                android:paddingRight="2dp"
+                android:paddingBottom="3dp"
+                android:background="@drawable/shape">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:src="@drawable/fakeimg2"
+                android:scaleType="centerCrop"
+                android:layout_height="180dp" />
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:paddingRight="20dp"
+                android:paddingLeft="20dp"
+                android:background="#fff">
 
                 <TextView
                     android:text="生活木工小物創作"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/tvEventName2"
-                    android:gravity="center"
-                    android:textAppearance="?android:textAppearanceLarge"/>
+                    android:textStyle="normal|bold"
+                    android:textSize="21sp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="5dp"/>
 
                 <TextView
-                    android:text="學習如何描繪切割線，然後從最簡單的造型開始學習刨削、修飾、打磨。"
+                    android:text="歡迎來到中原大學推廣教育中心！快來報名學習如何描繪切割線，然後從最簡單的造型開始學習刨削、修飾、打磨。"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/tvEventDescription2"
-                    android:gravity="center"
-                    android:textAppearance="?android:textAppearanceMedium"
-                    android:paddingRight="30dp"
-                    android:paddingLeft="30dp"
-                    android:paddingTop="6dp"/>
+                    android:textSize="15sp"
+                    android:layout_marginBottom="5dp"/>
+
                 <Button
-                    android:text="Learn More"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
                     android:id="@+id/bEventDetail2"
-                    android:layout_gravity="center_horizontal"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/background_floating_material_light"
-                android:paddingBottom="6dp">
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/llEvent3"
-                android:background="@color/Card2"
-                android:paddingTop="16dp">
-
-                <ImageView
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:src="@drawable/ic_menu_camera"
-                    android:id="@+id/iEvent3"
-                    android:layout_alignParentTop="true"
-                    android:alpha="0.5"
-                    android:layout_gravity="center_horizontal"/>
-
-                <TextView
-                    android:text="EventName"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/tvEventName3"
-                    android:gravity="center"
-                    android:textAppearance="?android:textAppearanceLarge"/>
-
-                <TextView
-                    android:text="EventDescription"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/tvEventDescription3"
-                    android:gravity="center"
-                    android:textAppearance="?android:textAppearanceMedium"
-                    android:paddingRight="30dp"
-                    android:paddingLeft="30dp"
-                    android:paddingTop="6dp"/>
-                <Button
-                    android:text="Learn More"
+                    android:text="more"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/bEventDetail3"
-                    android:layout_gravity="center_horizontal"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/background_floating_material_light"
-                android:paddingBottom="6dp">
+                    android:background="@android:color/transparent"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="15sp" />
 
             </LinearLayout>
-
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/llEvent4"
-                android:background="@color/Card1"
-                android:paddingTop="16dp">
-
-                <ImageView
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:src="@drawable/ic_menu_camera"
-                    android:id="@+id/iEvent4"
-                    android:layout_alignParentTop="true"
-                    android:alpha="0.5"
-                    android:layout_gravity="center_horizontal"/>
-
-                <TextView
-                    android:text="EventName"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/tvEventName4"
-                    android:gravity="center"
-                    android:textAppearance="?android:textAppearanceLarge"/>
-
-                <TextView
-                    android:text="EventDescription"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/tvEventDescription4"
-                    android:gravity="center"
-                    android:textAppearance="?android:textAppearanceMedium"
-                    android:paddingRight="30dp"
-                    android:paddingLeft="30dp"
-                    android:paddingTop="6dp"/>
-                <Button
-                    android:text="Learn More"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/bEventDetail4"
-                    android:layout_gravity="center_horizontal"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/background_floating_material_light"
-                android:paddingBottom="6dp">
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/llEvent5"
-                android:background="@color/Card2"
-                android:paddingTop="16dp">
-
-                <ImageView
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:src="@drawable/ic_menu_camera"
-                    android:id="@+id/iEvent5"
-                    android:layout_alignParentTop="true"
-                    android:alpha="0.5"
-                    android:layout_gravity="center_horizontal"/>
-
-                <TextView
-                    android:text="EventName"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/tvEventName5"
-                    android:gravity="center"
-                    android:textAppearance="?android:textAppearanceLarge"/>
-
-                <TextView
-                    android:text="EventDescription"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/tvEventDescription5"
-                    android:gravity="center"
-                    android:textAppearance="?android:textAppearanceMedium"
-                    android:paddingRight="30dp"
-                    android:paddingLeft="30dp"
-                    android:paddingTop="6dp"/>
-                <Button
-                    android:text="Learn More"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/bEventDetail5"
-                    android:layout_gravity="center_horizontal"/>
-            </LinearLayout>
-
         </LinearLayout>
+        </LinearLayout>
+
     </ScrollView>
 
 </RelativeLayout>
