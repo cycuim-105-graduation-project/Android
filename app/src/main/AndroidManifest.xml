@@ -26,20 +26,20 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".MainActivity">
+        <activity android:name=".Events">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".MainActivity" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".RegisterActivity" />
         <activity android:name=".ProfileActivity" />
         <activity android:name=".EditUserProfile" />
         <activity android:name=".BusinessCard" />
         <activity android:name=".EditBusinessCard" />
-        <activity android:name=".Events" />
         <activity android:name=".EditPassword" />
         <activity android:name=".News" />
         <activity android:name=".NewsDetails" />
