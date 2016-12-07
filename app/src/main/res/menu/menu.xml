@@ -3,6 +3,10 @@
     <group >
         <item android:title="Login"
             android:id="@+id/mLogin" />
+        <item android:title="Logout"
+            android:id="@+id/mLogout" />
+        <item android:title="Profile"
+            android:id="@+id/mProfile" />
         <item android:title="Businesscard"
             android:id="@+id/mBusinessCard" />
         <item android:title="Events"
