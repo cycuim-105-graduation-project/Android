@@ -155,13 +155,20 @@ public class News extends AppCompatActivity {
 
                         // Decode attachments
                         byte[] temp = Base64.decode(attachmentEncode, Base64.DEFAULT);
-                        String attachment = new String(temp, StandardCharsets.UTF_8);
+                        String data = new String(temp, StandardCharsets.UTF_8);
 
                         // Replace substring
                         String type = namespacedType.substring(22);
 
+                        // parse response
+                        JSONObject attachmentJson = new JSONObject(data);
+                        String category   = (String) attachmentJson.get("category");
+                        String subject    = (String) attachmentJson.get("subject");
+                        String content    = (String) attachmentJson.get("content");
+                        String attachment = (String) attachmentJson.get("attachment");
+
                         // Add type, attachment to list
-                        attachment_list.add(new Attachment(type, attachment));
+                        attachment_list.add(new Attachment(type, category, subject, content, attachment));
                     }
 
                     // To avoid 'Only the original thread that created a view hierarchy can touch its views'
@@ -203,23 +210,49 @@ public class News extends AppCompatActivity {
     public class Attachment {
 
         private String type;
-        private String data;
+        private String category;
+        private String subject;
+        private String content;
+        private String attachment;
 
-        public Attachment(String type,String data) {
-            this.type = type;
-            this.data = data;
+        public Attachment(String type, String category, String subject, String content, String attachment) {
+            this.type       = type;
+            this.category   = category;
+            this.subject    = subject;
+            this.content    = content;
+            this.attachment = attachment;
         }
-        public String getType(){
-            return type;
-        }
+
         public void setType(String type){
             this.type = type;
         }
-        public String getData(){
-            return data;
+        public void setCategory(String category){
+            this.category = category;
         }
-        public void setData(String data){
-            this.data = data;
+        public void setSubject(String subject){
+            this.subject = subject;
+        }
+        public void setContent(String content){
+            this.content = content;
+        }
+        public void setAttachment(String attachment){
+            this.attachment = attachment;
+        }
+
+        public String getType(){
+            return type;
+        }
+        public String getCategory(){
+            return category;
+        }
+        public String getSubject(){
+            return subject;
+        }
+        public String getContent(){
+            return content;
+        }
+        public String getAttachment(){
+            return attachment;
         }
     }
 
@@ -234,10 +267,17 @@ public class News extends AppCompatActivity {
         /*private view holder class*/
         private class ViewHolder {
             TextView tvType;
-            TextView tvData;
-            public ViewHolder(TextView type, TextView data){
-                this.tvType = type;
-                this.tvData = data;
+            TextView tvCategory;
+            TextView tvSubject;
+            TextView tvContent;
+            TextView tvAttachment;
+
+            public ViewHolder(TextView type, TextView category, TextView subject, TextView content, TextView attachment){
+                this.tvType       = type;
+                this.tvCategory   = category;
+                this.tvSubject    = subject;
+                this.tvContent    = content;
+                this.tvAttachment = attachment;
             }
         }
 
@@ -263,7 +303,10 @@ public class News extends AppCompatActivity {
                 convertView = myInflater.inflate(R.layout.activity_news_list_item, null);
                 holder = new ViewHolder(
                     (TextView) convertView.findViewById(R.id.tvType),
-                    (TextView) convertView.findViewById(R.id.tvData)
+                    (TextView) convertView.findViewById(R.id.tvCategory),
+                    (TextView) convertView.findViewById(R.id.tvSubject),
+                    (TextView) convertView.findViewById(R.id.tvContent),
+                    (TextView) convertView.findViewById(R.id.tvAttachment)
                 );
                 convertView.setTag(holder);
             } else {
@@ -272,7 +315,10 @@ public class News extends AppCompatActivity {
 
             Attachment Attachment = (Attachment)getItem(position);
             holder.tvType.setText(Attachment.getType());
-            holder.tvData.setText(Attachment.getData());
+            holder.tvCategory.setText(Attachment.getCategory());
+            holder.tvSubject.setText(Attachment.getSubject());
+            holder.tvContent.setText(Attachment.getContent());
+            holder.tvAttachment.setText(Attachment.getAttachment());
 
             return convertView;
         }
