@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="@dimen/activity_horizontal_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin" >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="top"
+        android:layout_marginBottom="16dp">
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginRight="15dp"
+            android:src="@drawable/i_announcement" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvCategory"
+                        android:text="會議廳內公告"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="15sp"
+                        android:textColor="#000"
+                        android:alpha="0.38"/>
+
+                    <TextView
+                        android:id="@+id/tvSubject"
+                        android:text="演講順序調動"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="21sp"
+                        android:textColor="#000"
+                        android:alpha="0.87"
+                        android:paddingTop="3dp"
+                        android:paddingBottom="5dp"/>
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tvType"
+                    android:text="Announcement"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:textSize="15sp"
+                    android:textAlignment="viewEnd" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tvContent"
+                android:text="本廳 13:00 原訂演講「中原大學優美歷史」因故延後至 15:00 開始，原訂下一場的「中原大學新宿舍建置說明會」提前開講，造成不便敬請見諒。"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="15sp"
+                android:textColor="#000"
+                android:alpha="0.87"
+                android:paddingBottom="3dp"/>
+
+            <TextView
+                android:id="@+id/tvAttachment"
+                android:text="無"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="15sp"
+                android:textColor="#000"
+                android:autoLink="web"
+                android:textColorLink="@color/colorAccent"/>
+
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
