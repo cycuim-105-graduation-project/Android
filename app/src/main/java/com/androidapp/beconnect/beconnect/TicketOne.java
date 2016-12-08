@@ -12,6 +12,15 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.androidapp.beconnect.beconnect.app.AppController;
+
+import java.util.HashMap;
+import java.util.Map;
+
 public class TicketOne extends AppCompatActivity {
 
     private BluetoothAdapter mBluetoothAdapter;
@@ -21,12 +30,17 @@ public class TicketOne extends AppCompatActivity {
 
     SessionManager session;
 
+    String url_logout;
+    String tag_string_req = "string_req";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ticket_one);
 
         session = new SessionManager(getApplicationContext());
+
+        session.checkLogin();
 
         bOKTicket = (Button) findViewById(R.id.bOKTicket);
 
@@ -116,8 +130,44 @@ public class TicketOne extends AppCompatActivity {
             switch (item.getItemId()) {
 
                 case R.id.mLogout:
-                    Intent Loginintent = new Intent(this, LoginActivity.class);
-                    this.startActivity(Loginintent);
+                    // 拿使用者登入 ID, Access_token, key
+                    HashMap<String, String> user = session.getUserDetails();
+
+                    final String uid          = user.get(SessionManager.KEY_UID);
+                    final String access_token = user.get(SessionManager.KEY_ACCESS_TOKEN);
+                    final String client       = user.get(SessionManager.KEY_CLIENT);
+
+                    url_logout = getResources().getString(R.string.url_logout);
+
+                    // send logout request
+                    StringRequest sr = new StringRequest(Request.Method.DELETE, url_logout,
+                            new Response.Listener<String>()
+                            {
+                                @Override
+                                public void onResponse(String response) {
+                                    Toast.makeText(TicketOne.this, "Logout success!", Toast.LENGTH_LONG).show();
+                                    session.logoutUser();
+                                }
+
+                            },
+                            new Response.ErrorListener()
+                            {
+                                @Override
+                                public void onErrorResponse(VolleyError error) {
+                                    Toast.makeText(TicketOne.this, error.toString(), Toast.LENGTH_LONG).show();
+                                }
+                            }){
+                        @Override
+                        public Map<String, String> getHeaders() {
+                            Map<String, String> params = new HashMap<>();
+                            params.put("access-token", access_token);
+                            params.put("uid",          uid);
+                            params.put("client",       client);
+
+                            return params;
+                        }
+                    };
+                    AppController.getInstance().addToRequestQueue(sr, tag_string_req);
                     break;
                 case R.id.mProfile:
                     Intent Profileintent = new Intent(this, ProfileActivity.class);

@@ -233,8 +233,42 @@ public class ProfileActivity extends AppCompatActivity {
             switch (item.getItemId()) {
 
                 case R.id.mLogout:
-                    Intent Loginintent = new Intent(this, LoginActivity.class);
-                    this.startActivity(Loginintent);
+                    // 拿使用者登入 ID, Access_token, key
+                    HashMap<String, String> user = session.getUserDetails();
+
+                    final String uid          = user.get(SessionManager.KEY_UID);
+                    final String access_token = user.get(SessionManager.KEY_ACCESS_TOKEN);
+                    final String client       = user.get(SessionManager.KEY_CLIENT);
+
+                    // send logout request
+                    StringRequest sr = new StringRequest(Request.Method.DELETE, url_logout,
+                            new Response.Listener<String>()
+                            {
+                                @Override
+                                public void onResponse(String response) {
+                                    Toast.makeText(ProfileActivity.this, "Logout success!", Toast.LENGTH_LONG).show();
+                                    session.logoutUser();
+                                }
+
+                            },
+                            new Response.ErrorListener()
+                            {
+                                @Override
+                                public void onErrorResponse(VolleyError error) {
+                                    Toast.makeText(ProfileActivity.this, error.toString(), Toast.LENGTH_LONG).show();
+                                }
+                            }){
+                        @Override
+                        public Map<String, String> getHeaders() {
+                            Map<String, String> params = new HashMap<>();
+                            params.put("access-token", access_token);
+                            params.put("uid",          uid);
+                            params.put("client",       client);
+
+                            return params;
+                        }
+                    };
+                    AppController.getInstance().addToRequestQueue(sr, tag_string_req);
                     break;
                 case R.id.mProfile:
                     Intent Profileintent = new Intent(this, ProfileActivity.class);
