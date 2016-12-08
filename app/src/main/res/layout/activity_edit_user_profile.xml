@@ -4,13 +4,13 @@
     android:id="@+id/activity_edit_user_profile"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.androidapp.beconnect.beconnect.EditUserProfile">
 
     <ScrollView
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -227,5 +227,5 @@
         </LinearLayout>
 
     </ScrollView>
-
+    <include layout="@layout/snackbar"/>
 </RelativeLayout>

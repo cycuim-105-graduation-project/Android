@@ -5,13 +5,13 @@
     android:id="@+id/activity_events"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="8dp"
-    android:paddingLeft="8dp"
-    android:paddingRight="8dp"
-    android:paddingTop="8dp"
     tools:context="com.androidapp.beconnect.beconnect.Events">
 
     <ScrollView
+        android:paddingBottom="8dp"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:paddingTop="8dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentTop="true"
@@ -23,68 +23,68 @@
             android:layout_height="wrap_content">
 
             <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingTop="2dp"
-            android:paddingLeft="2dp"
-            android:paddingRight="2dp"
-            android:paddingBottom="3dp"
-            android:background="@drawable/shape">
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:src="@drawable/japanese"
-                android:scaleType="centerCrop"
-                android:layout_height="180dp" />
-
-            <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
-                android:paddingRight="20dp"
-                android:paddingLeft="20dp"
-                android:background="#fff">
-
-                <TextView
-                    android:text="初級日文體驗"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textStyle="normal|bold"
-                    android:textSize="21sp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="5dp"/>
-
-                <TextView
-                    android:text="歡迎來到中原大學推廣教育中心！對日文有興趣的你，就從這裡踏出你的第一步吧！趕快來報名還享獨家優惠。"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="15sp"
-                    android:layout_marginBottom="5dp"/>
-
-                <Button
-                    android:id="@+id/bEventDetail1"
-                    android:text="more"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@android:color/transparent"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="15sp" />
-
-            </LinearLayout>
-        </LinearLayout>
-
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingTop="10dp"
+                android:paddingTop="2dp"
                 android:paddingLeft="2dp"
                 android:paddingRight="2dp"
                 android:paddingBottom="3dp"
                 android:background="@drawable/shape">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:src="@drawable/japanese"
+                    android:scaleType="centerCrop"
+                    android:layout_height="180dp" />
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:paddingRight="20dp"
+                    android:paddingLeft="20dp"
+                    android:background="#fff">
+
+                    <TextView
+                        android:text="初級日文體驗"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textStyle="normal|bold"
+                        android:textSize="21sp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="5dp"/>
+
+                    <TextView
+                        android:text="歡迎來到中原大學推廣教育中心！對日文有興趣的你，就從這裡踏出你的第一步吧！趕快來報名還享獨家優惠。"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="15sp"
+                        android:layout_marginBottom="5dp"/>
+
+                    <Button
+                        android:id="@+id/bEventDetail1"
+                        android:text="more"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/transparent"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="15sp" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dp"
+            android:paddingLeft="2dp"
+            android:paddingRight="2dp"
+            android:paddingBottom="3dp"
+            android:background="@drawable/shape">
 
             <ImageView
                 android:layout_width="match_parent"
@@ -129,8 +129,8 @@
 
             </LinearLayout>
         </LinearLayout>
-        </LinearLayout>
+    </LinearLayout>
 
     </ScrollView>
-
+    <include layout="@layout/snackbar"/>
 </RelativeLayout>

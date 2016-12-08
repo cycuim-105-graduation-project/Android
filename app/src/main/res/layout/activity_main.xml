@@ -62,5 +62,5 @@
                 android:text="News" />
         </RelativeLayout>
     </android.support.v4.widget.NestedScrollView>
-
+    <include layout="@layout/snackbar"/>
 </android.support.design.widget.CoordinatorLayout>
