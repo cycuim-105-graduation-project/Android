@@ -200,34 +200,68 @@ public class EditPassword extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu, menu);
+
+
+
+        if (session.isLoggedIn()) {
+
+            menu.getItem(0).setVisible(false);
+        }
+        else {
+            menu.getItem(1).setVisible(false);
+            menu.getItem(2).setVisible(false);
+            menu.getItem(3).setVisible(false);
+            menu.getItem(4).setVisible(false);
+            menu.getItem(5).setVisible(false);
+            menu.getItem(6).setVisible(false);
+        }
+
+
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch(item.getItemId()) {
-            case R.id.mLogin:
-                Intent Loginintent = new Intent(this, LoginActivity.class);
-                this.startActivity(Loginintent);
-                break;
-            case R.id.mBusinessCard:
-                Intent BusinessCardintent = new Intent(this, BusinessCard.class);
-                this.startActivity(BusinessCardintent);
-                break;
-            case R.id.mEvents:
-                Intent Eventsintent = new Intent(this, Events.class);
-                this.startActivity(Eventsintent);
-                break;
-            case R.id.mTicket:
-                Intent Ticketintent = new Intent(this, TicketOne.class);
-                this.startActivity(Ticketintent);
-                break;
-            case R.id.mNews:
-                Intent Newsintent = new Intent(this, News.class);
-                this.startActivity(Newsintent);
-                break;
-            default:
-                return super.onOptionsItemSelected(item);
+        if (session.isLoggedIn()) {
+            switch (item.getItemId()) {
+
+                case R.id.mLogout:
+                    Intent Loginintent = new Intent(this, LoginActivity.class);
+                    this.startActivity(Loginintent);
+                    break;
+                case R.id.mProfile:
+                    Intent Profileintent = new Intent(this, ProfileActivity.class);
+                    this.startActivity(Profileintent);
+                    break;
+                case R.id.mBusinessCard:
+                    Intent BusinessCardintent = new Intent(this, BusinessCard.class);
+                    this.startActivity(BusinessCardintent);
+                    break;
+                case R.id.mEvents:
+                    Intent Eventsintent = new Intent(this, Events.class);
+                    this.startActivity(Eventsintent);
+                    break;
+                case R.id.mTicket:
+                    Intent Ticketintent = new Intent(this, TicketOne.class);
+                    this.startActivity(Ticketintent);
+                    break;
+                case R.id.mNews:
+                    Intent Newsintent = new Intent(this, News.class);
+                    this.startActivity(Newsintent);
+                    break;
+                default:
+                    return super.onOptionsItemSelected(item);
+            }
+            return true;
+        }
+        else {
+            switch (item.getItemId()) {
+
+                case R.id.mLogin:
+                    Intent Loginintent = new Intent(this, LoginActivity.class);
+                    this.startActivity(Loginintent);
+                    break;
+            }
         }
 
         return true;
