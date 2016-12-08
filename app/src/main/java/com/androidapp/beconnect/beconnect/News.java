@@ -318,7 +318,11 @@ public class News extends AppCompatActivity {
             holder.tvCategory.setText(Attachment.getCategory());
             holder.tvSubject.setText(Attachment.getSubject());
             holder.tvContent.setText(Attachment.getContent());
-            holder.tvAttachment.setText(Attachment.getAttachment());
+            if (Attachment.getAttachment().equals("無")) {
+                holder.tvAttachment.setVisibility(View.GONE);
+            } else {
+                holder.tvAttachment.setText(Attachment.getAttachment());
+            }
 
             return convertView;
         }
