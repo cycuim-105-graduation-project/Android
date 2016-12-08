@@ -38,8 +38,8 @@ public class TicketOne extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     Toast.makeText(TicketOne.this, "報到成功，歡迎您！", Toast.LENGTH_SHORT).show();
-                    Intent MainActivityIntent = new Intent(TicketOne.this, MainActivity.class);
-                    TicketOne.this.startActivity(MainActivityIntent);
+                    Intent EventsIntent = new Intent(TicketOne.this, Events.class);
+                    TicketOne.this.startActivity(EventsIntent);
                 }
             });
         } else if (Values.ifCheckIn[0] == false && Values.nodeInRange == false) {
