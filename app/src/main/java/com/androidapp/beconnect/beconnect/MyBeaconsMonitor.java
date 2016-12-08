@@ -19,11 +19,12 @@ class MyBeaconsMonitor extends BeaconsMonitor {
     int id;
 
     // 不可變 ID
-    String  namespaceId;
-    String  instanceId;
-    String  advertisedIdString;
-    byte[]  advertisedIdHex;
-    String  advertisedId;
+    String namespaceId;
+    String instanceId;
+    String advertisedIdString;
+    byte[] advertisedIdHex;
+    String advertisedId;
+    String macId;
 
     // 距離
     float  averageRssi;
@@ -47,6 +48,7 @@ class MyBeaconsMonitor extends BeaconsMonitor {
             EddystoneBeacon    = (EddystoneUIDBeacon) beacon;
             id                 = EddystoneBeacon.getId();
             namespaceId        = EddystoneBeacon.getNamespaceId();
+            macId              = EddystoneBeacon.getPrettyAddress();
 
             // EddystoneBeacon.getInstanceId() 沒有給我正確的 instance，從 address 自己撈
             instanceId         = EddystoneBeacon.getPrettyAddress().replace(":", "").toLowerCase();
@@ -57,6 +59,12 @@ class MyBeaconsMonitor extends BeaconsMonitor {
             rangeName          = EddystoneBeacon.getRangeName();
 
             getEncodeAdvertisedId(advertisedIdString);
+
+            Log.d("macId:", macId);
+            if (macId.equals(Values.CheckInNode)) {
+                Values.nodeInRange = true;
+                Log.d("In Range?", String.valueOf(Values.nodeInRange));
+            }
         }
     }
 
