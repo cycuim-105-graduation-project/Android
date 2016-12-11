@@ -8,21 +8,29 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.androidapp.beconnect.beconnect.app.AppController;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import io.onebeacon.api.OneBeacon;
@@ -33,13 +41,19 @@ public class Events extends AppCompatActivity implements ServiceConnection {
     private BluetoothAdapter mBluetoothAdapter;
     private static final int REQUEST_ENABLE_BT = 1;
 
-    Button bEventDetail1;
-    Button bEventDetail2;
+    private List<detail> mItemList = null;
+
+    //Creating Views
+    private RecyclerView recyclerView;
+    private RecyclerView.LayoutManager layoutManager;
+    private RecyclerView.Adapter adapter;
 
     private MonitorService mService = null;
     SessionManager session;
+    String url_get_event;
     String url_logout;
     String tag_string_req = "string_req";
+    Button bEventDetail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,24 +64,56 @@ public class Events extends AppCompatActivity implements ServiceConnection {
 
         session = new SessionManager(getApplicationContext());
 
-        bEventDetail1 = (Button) findViewById(R.id.bEventDetail1);
+        //Initializing Views
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+        recyclerView.setHasFixedSize(true);
+        layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
 
-        bEventDetail1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent EventDetail1Intent = new Intent(Events.this, EventDetailsOne.class);
-                Events.this.startActivity(EventDetail1Intent);
-            }
-        });
-        bEventDetail2 = (Button) findViewById(R.id.bEventDetail2);
+        mItemList = new ArrayList<>();
 
-        bEventDetail2.setOnClickListener(new View.OnClickListener() {
+        url_get_event = getResources().getString(R.string.url_get_event);
+
+        JsonArrayRequest jar = new JsonArrayRequest(url_get_event,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        Log.d("response", response.toString());
+
+                        for (int i = 0; i < response.length(); i++) {
+                            try {
+                                JSONObject event = response.getJSONObject(i);
+                                mItemList.add(new detail(event.getString("id"),
+                                                        event.getString("name"),
+                                                        event.getString("description"),
+                                                        event.getString("feature_img_url"),
+                                                        event.getString("start_at"),
+                                                        event.getString("end_at"),
+                                                        event.getString("registration_start_at"),
+                                                        event.getString("registration_end_at"),
+                                                        event.getString("quantity"),
+                                                        event.getString("vacancy"),
+                                                        event.getString("place")));
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+                }, new Response.ErrorListener() {
             @Override
-            public void onClick(View v) {
-                Intent EventDetail2Intent = new Intent(Events.this, EventDetailsTwo.class);
-                Events.this.startActivity(EventDetail2Intent);
+            public void onErrorResponse(VolleyError error) {
+                Log.d("error", error.toString());
             }
-        });
+        }
+        );
+
+        AppController.getInstance().addToRequestQueue(jar, tag_string_req);
+
+        //Finally initializing our adapter
+        adapter = new CardAdapter(mItemList, this);
+
+        //Adding adapter to recyclerview
+        recyclerView.setAdapter(adapter);
 
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
 

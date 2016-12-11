@@ -54,6 +54,7 @@
         <activity android:name=".EventDetailsOne" />
         <activity android:name=".TicketOne" />
         <activity android:name=".TicketTwo" />
+        <activity android:name=".Agendas" />
         <service android:name=".MonitorService"/>
     </application>
 
