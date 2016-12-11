@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -87,7 +88,7 @@ public class Events extends AppCompatActivity implements ServiceConnection {
         }
 
         if (!bindService(new Intent(this, MonitorService.class), (ServiceConnection) this, BIND_AUTO_CREATE)) {
-            setTitle("Bind failed! Manifest?");
+            log("Bind failed! Manifest?");
         }
 
     }
@@ -227,7 +228,7 @@ public class Events extends AppCompatActivity implements ServiceConnection {
     @Override
     public void onServiceConnected(ComponentName name, IBinder service) {
         mService = ((MonitorService.LocalServiceBinder) service).getService();
-        setTitle("Service connected");
+        log("Service connected");
 
         // make the service to stick around by actually starting it
         startService(new Intent(this, MonitorService.class));
@@ -237,7 +238,7 @@ public class Events extends AppCompatActivity implements ServiceConnection {
     @Override
     public void onServiceDisconnected(ComponentName name) {
         mService = null;
-        setTitle("Service disconnected");
+        log("Service disconnected");
     }
 
     @Override
@@ -252,6 +253,10 @@ public class Events extends AppCompatActivity implements ServiceConnection {
         // Activity is not in foreground, make a trade-off between battery usage and scan latency
         OneBeacon.setScanStrategy(ScanStrategy.BALANCED);
         super.onPause();
+    }
+
+    private void log(String msg) {
+        Log.d("Events", msg);
     }
 
 }
