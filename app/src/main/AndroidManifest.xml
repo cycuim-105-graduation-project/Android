@@ -43,7 +43,12 @@
         <activity android:name=".BusinessCard" />
         <activity android:name=".EditBusinessCard" />
         <activity android:name=".EditPassword" />
-        <activity android:name=".News" />
+        <activity android:name=".News"
+            android:parentActivityName=".Events">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Events"/>
+        </activity>
         <activity android:name=".NewsDetails" />
         <activity android:name=".EventDetailsTwo" />
         <activity android:name=".EventDetailsOne" />

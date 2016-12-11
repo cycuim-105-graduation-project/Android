@@ -1,7 +1,13 @@
 package com.androidapp.beconnect.beconnect;
 
+import android.app.Notification;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationManagerCompat;
+import android.support.v4.app.TaskStackBuilder;
 import android.util.Base64;
 import android.util.Log;
 
@@ -29,6 +35,10 @@ import io.onebeacon.api.Beacon;
 import io.onebeacon.api.BeaconsMonitor;
 import io.onebeacon.api.Rangeable;
 import io.onebeacon.api.spec.EddystoneUIDBeacon;
+
+import static android.support.v4.app.NotificationCompat.DEFAULT_LIGHTS;
+import static android.support.v4.app.NotificationCompat.DEFAULT_SOUND;
+import static android.support.v4.app.NotificationCompat.DEFAULT_VIBRATE;
 
 /** Example subclass for a BeaconsMonitor **/
 class MyBeaconsMonitor extends BeaconsMonitor {
@@ -131,11 +141,36 @@ class MyBeaconsMonitor extends BeaconsMonitor {
         return advertisedId;
     }
 
-    public void getAttachmentContent(String content, String type, String data) {
+    public void pushNotification(String subject, String content) {
+        // NotificationCompat (https://developer.android.com/guide/topics/ui/notifiers/notifications.html)
+        NotificationCompat.Builder mBuilder =
+            new NotificationCompat.Builder(myBeaconsMonitor)
+                .setSmallIcon(R.mipmap.ic_launcher)
+                .setContentTitle(subject)
+                .setContentText(content);
+
+        Intent resultIntent = new Intent(myBeaconsMonitor, News.class);
+        TaskStackBuilder stackBuilder = TaskStackBuilder.create(myBeaconsMonitor);
+        // Adds the back stack
+        stackBuilder.addParentStack(News.class);
+        // Adds the Intent to the top of the stack
+        stackBuilder.addNextIntent(resultIntent);
+        // Gets a PendingIntent containing the entire back stack
+        PendingIntent resultPendingIntent =
+                stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        Notification notification = mBuilder
+            .setDefaults(DEFAULT_SOUND | DEFAULT_VIBRATE | DEFAULT_LIGHTS)
+            .setContentIntent(resultPendingIntent).build();
+        NotificationManagerCompat.from(myBeaconsMonitor).notify(0, notification);
+    }
+
+    public void CheckAttachmentUpdate(String subject, String content, String type, String data) {
         String temp = content;
 
         if (!list.contains(temp)) {
             list.add(temp);
+            pushNotification(subject, content);
             Snackbar.make(Values.container, "有新通知！" + content, Snackbar.LENGTH_LONG).show();
             Values.attachment.put(type, data);
         }
@@ -200,7 +235,7 @@ class MyBeaconsMonitor extends BeaconsMonitor {
                         String content    = (String) attachmentJson.get("content");
                         String attachment = (String) attachmentJson.get("attachment");
 
-                        getAttachmentContent(content, type, data);
+                        CheckAttachmentUpdate(subject, content, type, data);
                     }
                     return Response.success(new JSONObject(jsonString), HttpHeaderParser.parseCacheHeaders(response));
                 } catch (UnsupportedEncodingException e) {
