@@ -28,6 +28,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -134,6 +135,7 @@ public class News extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+        Collections.reverse(attachment_list);
         ListViewadapter = new CustomAdapter(News.this, attachment_list);
         lvNewsList.setAdapter(ListViewadapter);
     }
