@@ -160,6 +160,8 @@ class MyBeaconsMonitor extends BeaconsMonitor {
                 stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
 
         Notification notification = mBuilder
+            .setAutoCancel(true)
+            .setOnlyAlertOnce(true)
             .setDefaults(DEFAULT_SOUND | DEFAULT_VIBRATE | DEFAULT_LIGHTS)
             .setContentIntent(resultPendingIntent).build();
         NotificationManagerCompat.from(myBeaconsMonitor).notify(0, notification);
