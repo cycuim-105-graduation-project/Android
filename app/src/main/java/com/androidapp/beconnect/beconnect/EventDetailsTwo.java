@@ -2,6 +2,7 @@ package com.androidapp.beconnect.beconnect;
 
 import android.bluetooth.BluetoothAdapter;
 import android.content.Intent;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -37,6 +38,8 @@ public class EventDetailsTwo extends AppCompatActivity {
         setContentView(R.layout.activity_event_details_two);
 
         session = new SessionManager(getApplicationContext());
+
+        Values.container = (CoordinatorLayout) findViewById(R.id.snackbar);
 
         bSignUp = (Button) findViewById(R.id.bSignUp);
 

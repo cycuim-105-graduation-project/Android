@@ -2,6 +2,7 @@ package com.androidapp.beconnect.beconnect;
 
 import android.bluetooth.BluetoothAdapter;
 import android.content.Intent;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -39,6 +40,8 @@ public class BusinessCard extends AppCompatActivity {
         session = new SessionManager(getApplicationContext());
 
         session.checkLogin();
+
+        Values.container = (CoordinatorLayout) findViewById(R.id.snackbar);
 
         bEditBusinessCard = (Button) findViewById(R.id.bEditBusinessCard);
 

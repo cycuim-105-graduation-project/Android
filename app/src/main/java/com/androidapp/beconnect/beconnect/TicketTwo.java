@@ -4,6 +4,7 @@ import android.bluetooth.BluetoothAdapter;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -20,6 +21,8 @@ import com.androidapp.beconnect.beconnect.app.AppController;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import static com.androidapp.beconnect.beconnect.Values.container;
 
 public class TicketTwo extends AppCompatActivity {
 
@@ -40,6 +43,8 @@ public class TicketTwo extends AppCompatActivity {
         session = new SessionManager(getApplicationContext());
 
         session.checkLogin();
+
+        Values.container = (CoordinatorLayout) findViewById(R.id.snackbar);
 
         bOKTicket = (Button) findViewById(R.id.bOKTicket);
 

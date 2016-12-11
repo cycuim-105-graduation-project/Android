@@ -4,6 +4,7 @@ import android.bluetooth.BluetoothAdapter;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -41,6 +42,8 @@ public class TicketOne extends AppCompatActivity {
         session = new SessionManager(getApplicationContext());
 
         session.checkLogin();
+
+        Values.container = (CoordinatorLayout) findViewById(R.id.snackbar);
 
         bOKTicket = (Button) findViewById(R.id.bOKTicket);
 

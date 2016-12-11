@@ -3,6 +3,7 @@ package com.androidapp.beconnect.beconnect;
 import android.bluetooth.BluetoothAdapter;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -76,6 +77,8 @@ public class ProfileActivity extends AppCompatActivity {
         session = new SessionManager(getApplicationContext());
 
         session.checkLogin();
+
+        Values.container = (CoordinatorLayout) findViewById(R.id.snackbar);
 
         HashMap<String, String> user = session.getUserDetails();
 

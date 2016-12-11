@@ -5,8 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Base64;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -18,28 +16,22 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.NetworkResponse;
-import com.android.volley.ParseError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.VolleyLog;
-import com.android.volley.toolbox.HttpHeaderParser;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.androidapp.beconnect.beconnect.app.AppController;
+import com.google.common.collect.Iterables;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.UnsupportedEncodingException;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class News extends AppCompatActivity {
 
@@ -65,6 +57,30 @@ public class News extends AppCompatActivity {
         ArrayList myList = new ArrayList();
         session = new SessionManager(getApplicationContext());
 
+        fetchAttachment();
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while (true) {
+                    try {
+                        // 延遲 5 秒
+                        Thread.sleep( 5000 );
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            attachment_list.clear();
+                            fetchAttachment();
+                        }
+                    });
+                }
+            }
+        }).start();
+
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
 
         // 檢查是否有可用的藍牙裝置
@@ -82,16 +98,6 @@ public class News extends AppCompatActivity {
                 startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
             }
         }
-
-        Iterator iterator = Values.ID.iterator();
-        while (iterator.hasNext()) {
-            myList.add(iterator.next());
-        }
-
-        for (int i = 0; i < myList.size(); i++) {
-            sendRequest((String) myList.get(i));
-        }
-
     }
 
     // 使用onActivityResult 接收其他 Activity回傳的資料
@@ -108,112 +114,28 @@ public class News extends AppCompatActivity {
         }
     }
 
-    // TODO: sand request
-    public void sendRequest(String id) {
-        String url = getResources().getString(R.string.get_beacon_attachment);
-        String jsonString = "{\"observations\": [{\"advertisedId\": {\"type\": \"EDDYSTONE\", \"id\": \"";
-               jsonString += id.replace("\n", "");
-               jsonString += "\"}}],\"namespacedTypes\": [\"*/*\"]}";
-
-        Log.d("jsonString", jsonString);
-
-        final String finalJsonString = jsonString;
-        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, url, null,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        Log.d(TAG, response.toString());
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                String json;
-                NetworkResponse response = error.networkResponse;
-                Log.d("errer", error.toString());
-                Toast.makeText(News.this, String.valueOf(error), Toast.LENGTH_LONG).show();
-
-                if (response != null && response.data != null) {
-                    json = new String(response.data);
-                    String errors = trimMessage(json);
-
-                    Toast.makeText(News.this, errors, Toast.LENGTH_LONG).show();
-                }
-            }
-        }) {
-            @Override
-            public byte[] getBody() {
-                try {
-                    return finalJsonString.getBytes(PROTOCOL_CHARSET);
-                } catch (UnsupportedEncodingException uee) {
-                    VolleyLog.wtf("Unsupported Encoding while trying to get the bytes of %s using %s",
-                            finalJsonString, PROTOCOL_CHARSET);
-                    return null;
-                }
-            }
-
-            @Override
-            protected Response<JSONObject> parseNetworkResponse(NetworkResponse response) {
-                try {
-                    String jsonString = new String(response.data, HttpHeaderParser.parseCharset(response.headers));
-                    JSONObject obj = new JSONObject(jsonString);
-
-                    JSONArray attachments = obj.getJSONArray("beacons").getJSONObject(0).getJSONArray("attachments");
-
-                    for (int i = 0; i < attachments.length(); i++) {
-                        String namespacedType = (String) attachments.getJSONObject(i).get("namespacedType");
-                        String attachmentEncode = (String) attachments.getJSONObject(i).get("data");
-
-                        // Decode attachments
-                        byte[] temp = Base64.decode(attachmentEncode, Base64.DEFAULT);
-                        String data = new String(temp, StandardCharsets.UTF_8);
-
-                        // Replace substring
-                        String type = namespacedType.substring(22);
-
-                        // parse response
-                        JSONObject attachmentJson = new JSONObject(data);
-                        String category   = (String) attachmentJson.get("category");
-                        String subject    = (String) attachmentJson.get("subject");
-                        String content    = (String) attachmentJson.get("content");
-                        String attachment = (String) attachmentJson.get("attachment");
-
-                        // Add type, attachment to list
-                        attachment_list.add(new Attachment(type, category, subject, content, attachment));
-                    }
-
-                    // To avoid 'Only the original thread that created a view hierarchy can touch its views'
-                    runOnUiThread(new Runnable() {
-                        public void run() {
-                            ListViewadapter = new CustomAdapter(News.this, attachment_list);
-
-                            lvNewsList.setAdapter(ListViewadapter);
-                        }
-                    });
-
-
-                    return Response.success(new JSONObject(jsonString), HttpHeaderParser.parseCacheHeaders(response));
-                } catch (UnsupportedEncodingException e) {
-                    return Response.error(new ParseError(e));
-                } catch (JSONException je) {
-                    return Response.error(new ParseError(je));
-                }
-            }
-        };
-        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_string_req);
-    }
-
-    // 讓回傳 JSON 易讀
-    public String trimMessage(String json) {
-        String trimmedString = null;
-
+    public void fetchAttachment() {
+        Set<String> keys = Values.attachment.keySet();
         try {
-            JSONObject obj = new JSONObject(json);
-            JSONArray arr  = obj.getJSONArray("errors");
-            trimmedString  = arr.toString().replace("[", "").replace("]", "").replace("\"", "");
-        } catch(JSONException e) {
+            for (String key : keys) {
+                String type = key;
+                Collection<String> data = Values.attachment.get(key);
+
+                for (int i = 0; i < data.size(); i++) {
+                    JSONObject attachmentJson = new JSONObject(Iterables.get(data, i));
+                    String category   = (String) attachmentJson.get("category");
+                    String subject    = (String) attachmentJson.get("subject");
+                    String content    = (String) attachmentJson.get("content");
+                    String attachment = (String) attachmentJson.get("attachment");
+
+                    attachment_list.add(new Attachment(type, category, subject, content, attachment));
+                }
+            }
+        } catch (JSONException e) {
             e.printStackTrace();
         }
-        return trimmedString;
+        ListViewadapter = new CustomAdapter(News.this, attachment_list);
+        lvNewsList.setAdapter(ListViewadapter);
     }
 
     // 自定義 ListView (http://huli.logdown.com/posts/280137-android-custom-listview)
@@ -313,11 +235,11 @@ public class News extends AppCompatActivity {
             if (convertView == null) {
                 convertView = myInflater.inflate(R.layout.activity_news_list_item, null);
                 holder = new ViewHolder(
-                    (TextView) convertView.findViewById(R.id.tvType),
-                    (TextView) convertView.findViewById(R.id.tvCategory),
-                    (TextView) convertView.findViewById(R.id.tvSubject),
-                    (TextView) convertView.findViewById(R.id.tvContent),
-                    (TextView) convertView.findViewById(R.id.tvAttachment)
+                        (TextView) convertView.findViewById(R.id.tvType),
+                        (TextView) convertView.findViewById(R.id.tvCategory),
+                        (TextView) convertView.findViewById(R.id.tvSubject),
+                        (TextView) convertView.findViewById(R.id.tvContent),
+                        (TextView) convertView.findViewById(R.id.tvAttachment)
                 );
                 convertView.setTag(holder);
             } else {
