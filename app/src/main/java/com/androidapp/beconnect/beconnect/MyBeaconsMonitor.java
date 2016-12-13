@@ -36,10 +36,6 @@ import io.onebeacon.api.BeaconsMonitor;
 import io.onebeacon.api.Rangeable;
 import io.onebeacon.api.spec.EddystoneUIDBeacon;
 
-import static android.support.v4.app.NotificationCompat.DEFAULT_LIGHTS;
-import static android.support.v4.app.NotificationCompat.DEFAULT_SOUND;
-import static android.support.v4.app.NotificationCompat.DEFAULT_VIBRATE;
-
 /** Example subclass for a BeaconsMonitor **/
 class MyBeaconsMonitor extends BeaconsMonitor {
 
@@ -160,9 +156,6 @@ class MyBeaconsMonitor extends BeaconsMonitor {
                 stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
 
         Notification notification = mBuilder
-            .setAutoCancel(true)
-            .setOnlyAlertOnce(true)
-            .setDefaults(DEFAULT_SOUND | DEFAULT_VIBRATE | DEFAULT_LIGHTS)
             .setContentIntent(resultPendingIntent).build();
         NotificationManagerCompat.from(myBeaconsMonitor).notify(0, notification);
     }
