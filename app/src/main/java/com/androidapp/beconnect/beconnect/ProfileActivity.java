@@ -223,7 +223,7 @@ public class ProfileActivity extends AppCompatActivity {
             menu.getItem(3).setVisible(false);
             menu.getItem(4).setVisible(false);
             menu.getItem(5).setVisible(false);
-            menu.getItem(6).setVisible(false);
+//            menu.getItem(6).setVisible(false);
         }
 
 
