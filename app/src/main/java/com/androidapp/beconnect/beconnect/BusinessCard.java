@@ -168,10 +168,10 @@ public class BusinessCard extends AppCompatActivity {
                     Intent Eventsintent = new Intent(this, Events.class);
                     this.startActivity(Eventsintent);
                     break;
-                case R.id.mTicket:
-                    Intent Ticketintent = new Intent(this, TicketOne.class);
-                    this.startActivity(Ticketintent);
-                    break;
+//                case R.id.mTicket:
+//                    Intent Ticketintent = new Intent(this, TicketOne.class);
+//                    this.startActivity(Ticketintent);
+//                    break;
                 case R.id.mNews:
                     Intent Newsintent = new Intent(this, News.class);
                     this.startActivity(Newsintent);

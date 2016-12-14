@@ -11,8 +11,8 @@
             android:id="@+id/mBusinessCard" />
         <item android:title="Events"
             android:id="@+id/mEvents" />
-        <item android:title="Ticket"
-            android:id="@+id/mTicket" />
+        <!--<item android:title="Ticket"-->
+            <!--android:id="@+id/mTicket" />-->
         <item android:title="News"
             android:id="@+id/mNews" />
     </group>
