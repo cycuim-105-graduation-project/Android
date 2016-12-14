@@ -63,6 +63,7 @@ class MyBeaconsMonitor extends BeaconsMonitor {
     private static final String TAG = MainActivity.class.getSimpleName();
     private Context myBeaconsMonitor;
     ArrayList list = new ArrayList();
+    ArrayList ifPush = new ArrayList();
 
 
     public MyBeaconsMonitor(Context context) {
@@ -151,10 +152,14 @@ class MyBeaconsMonitor extends BeaconsMonitor {
                 Long startUnixType   = startDateType.getTime();
 
                 // 計算到分鐘差
-                boolean ifStart = (currentUnixType - startUnixType   / 1000 * 60) > 0;
+                boolean ifStart = ((currentUnixType - startUnixType) / 1000 * 60) > 0;
 
                 if (ifStart) {
-                    pushNotification("提醒：開始簽到", key+"已開始簽到");
+                    if (!ifPush.contains(map.get(key))) {
+                        ifPush.add(map.get(key));
+                        Log.d("提醒", String.valueOf(map.get(key)));
+                        pushNotification("提醒：開始簽到", key + "已開始簽到", 1);
+                    }
                 }
             } catch (ParseException e) {
                 e.printStackTrace();
@@ -162,7 +167,7 @@ class MyBeaconsMonitor extends BeaconsMonitor {
         }
     }
 
-    public void pushNotification(String subject, String content) {
+    public void pushNotification(String subject, String content , int id) {
         // NotificationCompat (https://developer.android.com/guide/topics/ui/notifiers/notifications.html)
         NotificationCompat.Builder mBuilder =
             new NotificationCompat.Builder(myBeaconsMonitor)
@@ -184,7 +189,7 @@ class MyBeaconsMonitor extends BeaconsMonitor {
             .setAutoCancel(true)
             .setOnlyAlertOnce(true)
             .setContentIntent(resultPendingIntent).build();
-        NotificationManagerCompat.from(myBeaconsMonitor).notify(0, notification);
+        NotificationManagerCompat.from(myBeaconsMonitor).notify(id, notification);
     }
 
     public void getPlace(String place) {
@@ -196,7 +201,7 @@ class MyBeaconsMonitor extends BeaconsMonitor {
 
         if (!list.contains(temp)) {
             list.add(temp);
-            pushNotification(subject, content);
+            pushNotification(subject, content, 0);
             Snackbar.make(Values.container, "有新通知！" + content, Snackbar.LENGTH_LONG).show();
             Values.attachment.put(type, data);
         }

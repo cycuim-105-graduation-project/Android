@@ -29,4 +29,5 @@ public class Values {
     public static String place;
     public static ArrayList checkIn = new ArrayList();
     public static HashMap start_time = new HashMap();
+    public static HashMap ifPush = new HashMap();
 }
