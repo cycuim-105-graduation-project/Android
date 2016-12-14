@@ -28,6 +28,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -50,6 +51,7 @@ public class Events extends AppCompatActivity implements ServiceConnection {
 
     private MonitorService mService = null;
     SessionManager session;
+    String url_get_event_agendas;
     String url_get_event;
     String url_logout;
     String tag_string_req = "string_req";
@@ -94,6 +96,7 @@ public class Events extends AppCompatActivity implements ServiceConnection {
                                                         event.getString("quantity"),
                                                         event.getString("vacancy"),
                                                         event.getString("place")));
+                                sendRequest(event.getString("id"));
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
@@ -137,6 +140,66 @@ public class Events extends AppCompatActivity implements ServiceConnection {
             log("Bind failed! Manifest?");
         }
 
+    }
+
+    public void sendRequest(String events_id) {
+        url_get_event_agendas = getResources().getString(R.string.url_get_event_agendas);
+        url_get_event_agendas = String.format(url_get_event_agendas, events_id);
+        JsonArrayRequest jar_get_agenda =
+                new JsonArrayRequest(url_get_event_agendas,
+                        new Response.Listener<JSONArray>() {
+                            @Override
+                            public void onResponse(JSONArray response) {
+                                Log.d("sendRequest_response", response.toString());
+                                String id;
+                                String date;
+                                String time;
+                                String name;
+                                String start_at_date;
+                                String start_at_time;
+                                String end_at_time;
+                                JSONObject agendaObject;
+                                JSONObject dateObject;
+                                JSONArray timeArray;
+                                JSONObject timeObject;
+
+                                for (int i = 0; i < response.length(); i++) {
+                                    try {
+                                        agendaObject = response.getJSONObject(i);
+                                        for (int j = 0; j < agendaObject.length(); j++) {
+                                            date = (String) agendaObject.names().get(j);
+                                            dateObject = agendaObject.getJSONObject(date);
+
+                                            for (int x = 0; x < dateObject.length(); x++) {
+                                                time = (String) dateObject.names().get(x);
+                                                timeArray = dateObject.getJSONArray(time);
+
+                                                for (int y = 0; y < timeArray.length(); y++) {
+                                                    timeObject = timeArray.getJSONObject(y);
+                                                    name = timeObject.getString("name");
+                                                    start_at_date = timeObject.getString("start_at_date");
+                                                    start_at_time = timeObject.getString("start_at_time");
+                                                    SimpleDateFormat formatDateTime = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+                                                    String startAtDateTime = start_at_date.concat(" ").concat(start_at_time);
+                                                    Values.start_time.put(name, startAtDateTime);
+                                                }
+                                            }
+                                        }
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                            }
+                        },
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                Log.d("error", error.toString());
+                            }
+                        }
+                );
+
+        AppController.getInstance().addToRequestQueue(jar_get_agenda, tag_string_req);
     }
 
     // 使用onActivityResult 接收其他 Activity回傳的資料

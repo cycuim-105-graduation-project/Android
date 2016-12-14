@@ -215,8 +215,8 @@ public class Agendas extends AppCompatActivity {
             Long endUnixType     = endDateType.getTime();
 
             // 計算到分鐘差
-            boolean ifStart = (currentUnixType - startUnixType   / 1000 * 60) > 0;
-            boolean ifEnd   = (endUnixType     - currentUnixType / 1000 * 60) > 0;
+            boolean ifStart = ((currentUnixType - startUnixType)   / 1000 * 60) > 0; // 已開始
+            boolean ifEnd   = ((endUnixType     - currentUnixType) / 1000 * 60) > 0; // 還沒結束
 
             if (ifStart && ifEnd) {
                 speechIsOn = true;

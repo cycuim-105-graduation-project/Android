@@ -29,7 +29,11 @@ import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Map;
 
 import io.onebeacon.api.Beacon;
 import io.onebeacon.api.BeaconsMonitor;
@@ -91,6 +95,7 @@ class MyBeaconsMonitor extends BeaconsMonitor {
 
             getEncodeAdvertisedId(advertisedIdString);
             sendRequest(getEncodeAdvertisedId(advertisedIdString));
+            ifCanCheckIn();
         }
     }
 
@@ -126,6 +131,35 @@ class MyBeaconsMonitor extends BeaconsMonitor {
         }
 
         return advertisedId;
+    }
+
+    public void ifCanCheckIn() {
+        Map map = (Map) Values.start_time;
+
+        // 計算演講是否進行中
+        SimpleDateFormat formatDateTime = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        Date getDate = new Date();
+        String currentDateTime = formatDateTime.format(getDate);
+
+        for (Object key : map.keySet()) {
+            System.out.println(key + " : " + map.get(key));
+            try {
+                Date currentDateType = formatDateTime.parse(currentDateTime);
+                Date startDateType   = formatDateTime.parse((String) map.get(key));
+
+                Long currentUnixType = currentDateType.getTime();
+                Long startUnixType   = startDateType.getTime();
+
+                // 計算到分鐘差
+                boolean ifStart = (currentUnixType - startUnixType   / 1000 * 60) > 0;
+
+                if (ifStart) {
+                    pushNotification("提醒：開始簽到", key+"已開始簽到");
+                }
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     public void pushNotification(String subject, String content) {

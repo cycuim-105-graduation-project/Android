@@ -6,6 +6,7 @@ import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -27,4 +28,5 @@ public class Values {
     // 報到
     public static String place;
     public static ArrayList checkIn = new ArrayList();
+    public static HashMap start_time = new HashMap();
 }
