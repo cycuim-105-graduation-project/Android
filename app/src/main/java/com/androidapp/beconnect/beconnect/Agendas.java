@@ -4,6 +4,7 @@ import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -14,6 +15,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,7 +32,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -43,12 +48,13 @@ public class Agendas extends AppCompatActivity {
     private BluetoothAdapter mBluetoothAdapter;
     private static final int REQUEST_ENABLE_BT = 1;
     String url_get_event_agendas;
+    String url_Check_in_event_agendas;
     String tag_string_req = "string_req";
     String url_logout;
     SessionManager session;
 
-//    private ListView AgendaListView;
-//    private Agendas.CustomAdapter ListViewadapter;
+    Button bCheckIn;
+
     final List<Agenda> agenda_list = new ArrayList<>();
 
     //Creating Views
@@ -61,7 +67,7 @@ public class Agendas extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_agendas);
 
-//        AgendaListView = (ListView) findViewById(R.id.lvAgendaList);
+        Values.container = (CoordinatorLayout) findViewById(R.id.snackbar);
 
         //Initializing Views
         recyclerView = (RecyclerView) findViewById(R.id.rvAgendaList);
@@ -80,6 +86,7 @@ public class Agendas extends AppCompatActivity {
                 @Override
                 public void onResponse(JSONArray response) {
                     Log.d("response", response.toString());
+                    String id;
                     String date;
                     String time;
                     String name;
@@ -88,6 +95,9 @@ public class Agendas extends AppCompatActivity {
                     String speaker_name;
                     String speaker_description;
                     String speaker_image;
+                    String start_at_date;
+                    String start_at_time;
+                    String end_at_time;
                     JSONObject agendaObject;
                     JSONObject dateObject;
                     JSONArray timeArray;
@@ -109,13 +119,17 @@ public class Agendas extends AppCompatActivity {
                                     for (int y = 0; y < timeArray.length(); y++) {
                                         timeObject = timeArray.getJSONObject(y);
                                         Log.d("timeObject", timeObject.toString());
+                                        id = timeObject.getString("id");
                                         name = timeObject.getString("name");
                                         description = timeObject.getString("description");
                                         indoor_level = timeObject.getString("indoor_level");
                                         speaker_name = timeObject.getJSONObject("speaker").getString("name");
                                         speaker_description = timeObject.getJSONObject("speaker").getString("description");
                                         speaker_image = timeObject.getJSONObject("speaker").getString("image");
-                                        agenda_list.add(new Agenda(date, time, name, description, indoor_level, speaker_name, speaker_description, speaker_image));
+                                        start_at_date = timeObject.getString("start_at_date");
+                                        start_at_time = timeObject.getString("start_at_time");
+                                        end_at_time = timeObject.getString("end_at_time");
+                                        agenda_list.add(new Agenda(id, date, time, name, description, indoor_level, speaker_name, speaker_description, speaker_image, start_at_date, start_at_time, end_at_time));
                                     }
                                 }
                             }
@@ -128,24 +142,17 @@ public class Agendas extends AppCompatActivity {
             new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
-                    Log.d("error111", error.toString());
+                    Log.d("error", error.toString());
                 }
             }
         );
 
         AppController.getInstance().addToRequestQueue(jar, tag_string_req);
 
-        //Finally initializing our adapter
         adapter = new CustomAdapter(this, agenda_list);
-
-        //Adding adapter to recyclerview
         recyclerView.setAdapter(adapter);
 
-
-//        ListViewadapter = new Agendas.CustomAdapter(Agendas.this, agenda_list);
-//
-//        AgendaListView.setAdapter(ListViewadapter);
-
+        // 藍芽
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
 
         // 檢查是否有可用的藍牙裝置
@@ -179,9 +186,64 @@ public class Agendas extends AppCompatActivity {
         }
     }
 
+    public boolean ifCanCheckIn(String start_at_date, String start_at_time, String end_at_time, String indoor_level) {
+        boolean TF = false;
+        boolean speechIsOn = false;
+        boolean ifRightPlace = false;
+
+        // 確認是否是對的地點
+        if (indoor_level.equals(Values.place)) {
+            ifRightPlace = true;
+        } else {
+            ifRightPlace = false;
+        }
+
+        // 計算演講是否進行中
+        SimpleDateFormat formatDateTime = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        Date getDate = new Date();
+        String currentDateTime = formatDateTime.format(getDate);
+        String startAtDateTime = start_at_date.concat(" ").concat(start_at_time);
+        String endAtDateTime   = start_at_date.concat(" ").concat(end_at_time);
+
+        try {
+            Date currentDateType = formatDateTime.parse(currentDateTime);
+            Date startDateType   = formatDateTime.parse(startAtDateTime);
+            Date endDateType     = formatDateTime.parse(endAtDateTime);
+
+            Long currentUnixType = currentDateType.getTime();
+            Long startUnixType   = startDateType.getTime();
+            Long endUnixType     = endDateType.getTime();
+
+            // 計算到分鐘差
+            boolean ifStart = (currentUnixType - startUnixType   / 1000 * 60) > 0;
+            boolean ifEnd   = (endUnixType     - currentUnixType / 1000 * 60) > 0;
+
+            if (ifStart && ifEnd) {
+                speechIsOn = true;
+            } else {
+                speechIsOn = false;
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        if (ifRightPlace && speechIsOn) {
+            TF = true;
+        } else if (ifRightPlace && !speechIsOn) {
+            // wrong timing
+        } else if (!ifRightPlace && speechIsOn) {
+            // wrong place
+        } else {
+            TF = false;
+        }
+
+        return TF;
+    }
+
     // 自定義 ListView (http://huli.logdown.com/posts/280137-android-custom-listview)
     public static class Agenda {
 
+        private String id;
         private String date;
         private String time;
         private String name;
@@ -190,8 +252,12 @@ public class Agendas extends AppCompatActivity {
         private String speaker_name;
         private String speaker_description;
         private String speaker_image;
+        private String start_at_date;
+        private String start_at_time;
+        private String end_at_time;
 
-        public Agenda(String date, String time, String name, String description, String indoor_level, String speaker_name, String speaker_description, String speaker_image) {
+        public Agenda(String id, String date, String time, String name, String description, String indoor_level, String speaker_name, String speaker_description, String speaker_image, String start_at_date, String start_at_time, String end_at_time) {
+            this.id = id;
             this.date = date;
             this.time = time;
             this.name = name;
@@ -200,6 +266,9 @@ public class Agendas extends AppCompatActivity {
             this.speaker_name = speaker_name;
             this.speaker_description = speaker_description;
             this.speaker_image = speaker_image;
+            this.start_at_date = start_at_date;
+            this.start_at_time = start_at_time;
+            this.end_at_time = end_at_time;
         }
 
         public void setDate(String date){
@@ -209,6 +278,9 @@ public class Agendas extends AppCompatActivity {
             this.time = time;
         }
 
+        public String getId(){
+            return id;
+        }
         public String getDate(){
             return date;
         }
@@ -232,6 +304,15 @@ public class Agendas extends AppCompatActivity {
         }
         public String getSpeaker_image(){
             return speaker_image;
+        }
+        public String getStart_at_date(){
+            return start_at_date;
+        }
+        public String getStart_at_time(){
+            return start_at_time;
+        }
+        public String getEnd_at_time(){
+            return end_at_time;
         }
     }
 
@@ -265,11 +346,77 @@ public class Agendas extends AppCompatActivity {
             holder.tvIndoor_level.setText(items.getIndoor_level());
             holder.tvSpeakerName.setText(items.getSpeaker_name());
             holder.tvSpeakerDescription.setText(items.getSpeaker_description());
+            holder.bCheckIn.setId(Integer.parseInt(items.getId()));
 
             imageLoader = CustomVolleyRequest.getInstance(context).getImageLoader();
             imageLoader.get(items.speaker_image, ImageLoader.getImageListener(holder.ivSpeakerImage, R.mipmap.ic_launcher, android.R.drawable.ic_dialog_alert));
 
             holder.ivSpeakerImage.setImageUrl(items.speaker_image, imageLoader);
+            final String EventAgendaId = getIntent().getStringExtra("EXTRA_SESSION_ID").concat("-").concat(items.getId());
+
+            if (Values.checkIn.contains(EventAgendaId)) {
+                holder.bCheckIn.setText("已簽到");
+            } else {
+
+                if (ifCanCheckIn(items.getStart_at_date(), items.getStart_at_time(), items.getEnd_at_time(), items.getIndoor_level())) {
+                    holder.bCheckIn.setText("可以簽到");
+                    if (session.isLoggedIn()) {
+                        url_Check_in_event_agendas = getResources().getString(R.string.url_Check_in_event_agendas);
+                        url_Check_in_event_agendas = String.format(url_Check_in_event_agendas, items.getId());
+                        HashMap<String, String> user = session.getUserDetails();
+
+                        final String uid = user.get(SessionManager.KEY_UID);
+                        final String access_token = user.get(SessionManager.KEY_ACCESS_TOKEN);
+                        final String client = user.get(SessionManager.KEY_CLIENT);
+
+                        holder.bCheckIn.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                StringRequest sr = new StringRequest(Request.Method.POST, url_Check_in_event_agendas, new Response.Listener<String>() {
+                                    @Override
+                                    public void onResponse(String response) {
+                                        Toast.makeText(Agendas.this, "已簽到 enjoy it!", Toast.LENGTH_LONG).show();
+                                        Values.checkIn.add(EventAgendaId);
+
+                                        Intent intent = new Intent(Agendas.this, Events.class);
+                                        Agendas.this.startActivity(intent);
+                                        finish();
+                                    }
+                                }, new Response.ErrorListener() {
+                                    @Override
+                                    public void onErrorResponse(VolleyError error) {
+                                        Log.d("error when checkin", error.toString());
+                                    }
+                                }) {
+                                    @Override
+                                    public Map<String, String> getHeaders() {
+                                        Map<String, String> params = new HashMap<>();
+                                        params.put("access-token", access_token);
+                                        params.put("uid", uid);
+                                        params.put("client", client);
+                                        return params;
+                                    }
+                                };
+                                AppController.getInstance().addToRequestQueue(sr, tag_string_req);
+                            }
+                        });
+                    } else {
+                        holder.bCheckIn.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Toast.makeText(Agendas.this, "請先登入", Toast.LENGTH_LONG).show();
+                                //                            Snackbar.make(container, "請先登入", Snackbar.LENGTH_LONG).setAction("前往登入", new View.OnClickListener() {
+                                //                                @Override
+                                //                                public void onClick(View v) {
+                                //                                    Intent loginIntent = new Intent(Agendas.this, LoginActivity.class);
+                                //                                    Agendas.this.startActivity(loginIntent);
+                                //                                }
+                                //                            }).show();
+                            }
+                        });
+                    }
+                }
+            }
         }
 
         @Override
@@ -286,6 +433,7 @@ public class Agendas extends AppCompatActivity {
             public TextView tvSpeakerName;
             public TextView tvSpeakerDescription;
             public NetworkImageView ivSpeakerImage;
+            public Button bCheckIn;
 
             public ViewHolder(View itemView){
                 super(itemView);
@@ -297,6 +445,7 @@ public class Agendas extends AppCompatActivity {
                 tvSpeakerName = (TextView) itemView.findViewById(R.id.tvSpeakerName);
                 tvSpeakerDescription = (TextView) itemView.findViewById(R.id.tvSpeakerDescription);
                 ivSpeakerImage = (NetworkImageView) itemView.findViewById(R.id.ivSpeakerImage);
+                bCheckIn = (Button) itemView.findViewById(R.id.bCheckIn);
                 itemView.setOnClickListener(this);
             }
 
@@ -305,39 +454,6 @@ public class Agendas extends AppCompatActivity {
 
             }
         }
-
-//        @Override
-//        public View getView(int position, View convertView, ViewGroup parent) {
-//            Agendas.CustomAdapter.ViewHolder holder = null;
-//            if (convertView == null) {
-//                convertView = myInflater.inflate(R.layout.activity_agendas_list_item, null);
-//                holder = new Agendas.CustomAdapter.ViewHolder(
-//                        (TextView) convertView.findViewById(R.id.tvDate),
-//                        (TextView) convertView.findViewById(R.id.tvTime),
-//                        (TextView) convertView.findViewById(R.id.tvName),
-//                        (TextView) convertView.findViewById(R.id.tvDescription),
-//                        (TextView) convertView.findViewById(R.id.tvIndoor_level),
-//                        (TextView) convertView.findViewById(R.id.tvSpeakerName),
-//                        (TextView) convertView.findViewById(R.id.tvSpeakerDescription),
-//                        (TextView) convertView.findViewById(R.id.ivSpeakerImage)
-//                );
-//                convertView.setTag(holder);
-//            } else {
-//                holder = (Agendas.CustomAdapter.ViewHolder) convertView.getTag();
-//            }
-//
-//            Agenda Agenda = (Agenda) getItem(position);
-//            holder.tvDate.setText(Agenda.getDate());
-//            holder.tvTime.setText(Agenda.getTime());
-//            holder.tvName.setText(Agenda.getName());
-//            holder.tvDescription.setText(Agenda.getDescription());
-//            holder.tvIndoor_level.setText(Agenda.getIndoor_level());
-//            holder.tvSpeakerName.setText(Agenda.getSpeaker_name());
-//            holder.tvSpeakerDescription.setText(Agenda.getSpeaker_description());
-//            holder.ivSpeakerImage.setText(Agenda.getSpeaker_image());
-//
-//            return convertView;
-//        }
     }
 
     // menu

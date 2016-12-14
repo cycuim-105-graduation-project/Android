@@ -90,12 +90,6 @@ class MyBeaconsMonitor extends BeaconsMonitor {
             rangeName          = EddystoneBeacon.getRangeName();
 
             getEncodeAdvertisedId(advertisedIdString);
-
-            Log.d("macId:", macId);
-            if (macId.equals(Values.CheckInNode)) {
-                Values.nodeInRange = true;
-                Log.d("In Range?", String.valueOf(Values.nodeInRange));
-            }
             sendRequest(getEncodeAdvertisedId(advertisedIdString));
         }
     }
@@ -111,9 +105,6 @@ class MyBeaconsMonitor extends BeaconsMonitor {
             // EddystoneBeacon.getInstanceId() 沒有給我正確的 instance，從 address 自己撈
             instanceId         = EddystoneBeacon.getPrettyAddress().replace(":", "").toLowerCase();
             advertisedIdString = namespaceId.concat(instanceId);
-
-//            log("fetch attachment_init");
-//            sendRequest(getEncodeAdvertisedId(advertisedIdString));
         }
 
         // see Beacon.Type.* for more types, and io.onebeacon.api.spec.* for beacon type interfaces
@@ -156,8 +147,14 @@ class MyBeaconsMonitor extends BeaconsMonitor {
                 stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
 
         Notification notification = mBuilder
+            .setAutoCancel(true)
+            .setOnlyAlertOnce(true)
             .setContentIntent(resultPendingIntent).build();
         NotificationManagerCompat.from(myBeaconsMonitor).notify(0, notification);
+    }
+
+    public void getPlace(String place) {
+        Values.place = place;
     }
 
     public void CheckAttachmentUpdate(String subject, String content, String type, String data) {
@@ -225,12 +222,17 @@ class MyBeaconsMonitor extends BeaconsMonitor {
 
                         // parse response
                         JSONObject attachmentJson = new JSONObject(data);
-                        String category   = (String) attachmentJson.get("category");
-                        String subject    = (String) attachmentJson.get("subject");
-                        String content    = (String) attachmentJson.get("content");
-                        String attachment = (String) attachmentJson.get("attachment");
 
-                        CheckAttachmentUpdate(subject, content, type, data);
+                        if (type.equals("Announcement")) {
+                            String category   = (String) attachmentJson.get("category");
+                            String subject    = (String) attachmentJson.get("subject");
+                            String content    = (String) attachmentJson.get("content");
+                            String attachment = (String) attachmentJson.get("attachment");
+                            CheckAttachmentUpdate(subject, content, "Announcement", data);
+                        } else if (type.equals("IndoorLevel")) {
+                            String place = (String) attachmentJson.get("name");
+                            getPlace(place);
+                        }
                     }
                     return Response.success(new JSONObject(jsonString), HttpHeaderParser.parseCacheHeaders(response));
                 } catch (UnsupportedEncodingException e) {

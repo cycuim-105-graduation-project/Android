@@ -5,6 +5,7 @@ import android.support.design.widget.CoordinatorLayout;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
 
+import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -24,7 +25,6 @@ public class Values {
     public static CoordinatorLayout container;
 
     // 報到
-    public static String CheckInNode = "20:91:48:35:94:D5";
-    public static boolean nodeInRange = false;
-    public static boolean ifCheckIn[] = new boolean[2];
+    public static String place;
+    public static ArrayList checkIn = new ArrayList();
 }

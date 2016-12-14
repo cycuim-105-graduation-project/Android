@@ -7,20 +7,39 @@
     android:orientation="vertical">
 
     <LinearLayout
+        android:id="@+id/checkin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="8dp">
-        <TextView
-            android:id="@+id/tvDate"
-            android:text="2016/00/00"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="16dp"
             android:paddingRight="16dp"
-            android:minHeight="40dp"
-            android:gravity="center_vertical"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:textColor="?android:attr/textColorPrimary" />
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/tvDate"
+                android:text="2016/00/00"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:minHeight="40dp"
+                android:gravity="center_vertical"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="?android:attr/textColorPrimary" />
+
+            <Button
+                android:id="@+id/bCheckIn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="48dp"
+                android:padding="16dp"
+                android:text="已結束\n或未開始"
+                android:drawableLeft="@android:drawable/ic_menu_myplaces"
+                android:background="@android:color/transparent"/>
+        </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -63,6 +82,7 @@
                     android:textAppearance="@style/TextAppearance.AppCompat.SearchResult.Subtitle"
                     android:textSize="18sp"
                     android:textColor="?android:attr/textColorPrimary" />
+
             </LinearLayout>
 
             <LinearLayout
@@ -186,7 +206,5 @@
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
-
-    <include layout="@layout/snackbar"/>
 
 </LinearLayout>

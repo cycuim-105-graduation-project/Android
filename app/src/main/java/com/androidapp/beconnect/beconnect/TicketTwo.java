@@ -2,14 +2,12 @@ package com.androidapp.beconnect.beconnect;
 
 import android.bluetooth.BluetoothAdapter;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -21,8 +19,6 @@ import com.androidapp.beconnect.beconnect.app.AppController;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import static com.androidapp.beconnect.beconnect.Values.container;
 
 public class TicketTwo extends AppCompatActivity {
 
@@ -48,28 +44,28 @@ public class TicketTwo extends AppCompatActivity {
 
         bOKTicket = (Button) findViewById(R.id.bOKTicket);
 
-        if (Values.ifCheckIn[1] == true) {
-            bOKTicket.setText("已報到");
-            bOKTicket.setClickable(false);
-            bOKTicket.setBackgroundColor(Color.TRANSPARENT);
-            bOKTicket.setTextColor(Color.argb(100, 0, 0, 0));
-        } else if (Values.ifCheckIn[1] == false && Values.nodeInRange == true) {
-            bOKTicket.setText("報到");
-            Values.ifCheckIn[1] = true;
-            bOKTicket.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Toast.makeText(TicketTwo.this, "報到成功，歡迎您！", Toast.LENGTH_SHORT).show();
-                    Intent EventsIntent = new Intent(TicketTwo.this, Events.class);
-                    TicketTwo.this.startActivity(EventsIntent);
-                }
-            });
-        } else if (Values.ifCheckIn[1] == false && Values.nodeInRange == false) {
-            bOKTicket.setText("未在報到入口範圍內");
-            bOKTicket.setClickable(false);
-            bOKTicket.setBackgroundColor(Color.TRANSPARENT);
-            bOKTicket.setTextColor(Color.argb(100, 0, 0, 0));
-        }
+//        if (Values.ifCheckIn[1] == true) {
+//            bOKTicket.setText("已報到");
+//            bOKTicket.setClickable(false);
+//            bOKTicket.setBackgroundColor(Color.TRANSPARENT);
+//            bOKTicket.setTextColor(Color.argb(100, 0, 0, 0));
+//        } else if (Values.ifCheckIn[1] == false && Values.nodeInRange == true) {
+//            bOKTicket.setText("報到");
+//            Values.ifCheckIn[1] = true;
+//            bOKTicket.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    Toast.makeText(TicketTwo.this, "報到成功，歡迎您！", Toast.LENGTH_SHORT).show();
+//                    Intent EventsIntent = new Intent(TicketTwo.this, Events.class);
+//                    TicketTwo.this.startActivity(EventsIntent);
+//                }
+//            });
+//        } else if (Values.ifCheckIn[1] == false && Values.nodeInRange == false) {
+//            bOKTicket.setText("未在報到入口範圍內");
+//            bOKTicket.setClickable(false);
+//            bOKTicket.setBackgroundColor(Color.TRANSPARENT);
+//            bOKTicket.setTextColor(Color.argb(100, 0, 0, 0));
+//        }
 
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
 
