@@ -8,6 +8,9 @@
         android:id="@+id/card_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginLeft="50dp"
         card_view:cardCornerRadius="2dp"
         card_view:cardUseCompatPadding="true">
 
@@ -15,13 +18,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="10dp"
+            android:padding="16dp"
             android:background="@drawable/shape">
             <com.android.volley.toolbox.NetworkImageView
                 android:id="@+id/ivImage"
                 android:layout_width="match_parent"
                 android:scaleType="centerCrop"
-                android:layout_height="180dp" />
+                android:layout_height="320dp" />
 
             <LinearLayout
                 android:orientation="vertical"
@@ -38,74 +41,168 @@
                     android:text="初級日文體驗"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textStyle="normal|bold"
-                    android:textSize="21sp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="5dp"/>
-
-                <TextView
-                    android:id="@+id/tvDescription"
-                    android:text="歡迎來到中原大學推廣教育中心！對日文有興趣的你，就從這裡踏出你的第一步吧！趕快來報名還享獨家優惠。"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="15sp"
-                    android:layout_marginBottom="5dp"/>
-
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Display2" />
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:layout_marginBottom="5dp">
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp">
+
+                    <TextView
+                        android:text="活動描述"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:minHeight="50dp"
+                        android:gravity="center_vertical"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                        android:textColor="?android:attr/textColorSecondary" />
+                    <TextView
+                        android:id="@+id/tvDescription"
+                        android:text="flyingV 是目前台灣最大的群眾募資平台，在 flyingV 上，你可以找到許多值得參與的計劃，並與奮力向前的提案者們，一起跨越理想與現實的交界。	"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="50dp"
+                        android:paddingTop="8dp"
+                        android:paddingBottom="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:paddingLeft="16dp"
+                        android:paddingRight="16dp"
+                        android:lineSpacingMultiplier="1.2"
+                        android:gravity="center_vertical"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                        android:textSize="18sp"
+                        android:textColor="?android:attr/textColorPrimary" />
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp">
+
+                    <TextView
+                        android:text="活動時間"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:minHeight="50dp"
+                        android:gravity="center_vertical"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                        android:textColor="?android:attr/textColorSecondary" />
                     <TextView
                         android:id="@+id/tvStartAt"
                         android:text="2016/09/22 09:00"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textSize="15sp"/>
+                        android:minHeight="50dp"
+                        android:paddingTop="8dp"
+                        android:paddingBottom="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:paddingLeft="16dp"
+                        android:paddingRight="16dp"
+                        android:lineSpacingMultiplier="1.2"
+                        android:gravity="center_vertical"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                        android:textSize="18sp"
+                        android:textColor="?android:attr/textColorPrimary" />
+
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:layout_marginBottom="5dp">
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp">
+
+                    <TextView
+                        android:text="活動地點"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:minHeight="50dp"
+                        android:gravity="center_vertical"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                        android:textColor="?android:attr/textColorSecondary" />
                     <TextView
                         android:id="@+id/tvPlace"
                         android:text="中原大學"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textSize="15sp"/>
+                        android:minHeight="50dp"
+                        android:paddingTop="8dp"
+                        android:paddingBottom="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:paddingLeft="16dp"
+                        android:paddingRight="16dp"
+                        android:lineSpacingMultiplier="1.2"
+                        android:gravity="center_vertical"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                        android:textSize="18sp"
+                        android:textColor="?android:attr/textColorPrimary" />
+
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:layout_marginBottom="5dp">
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp">
+
                     <TextView
                         android:text="開放名額"
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:textSize="15sp"/>
+                        android:minHeight="50dp"
+                        android:gravity="center_vertical"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                        android:textColor="?android:attr/textColorSecondary" />
                     <TextView
                         android:id="@+id/tvQuantity"
-                        android:text="15"
-                        android:layout_width="0dp"
+                        android:text="258"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:textSize="15sp"/>
+                        android:minHeight="50dp"
+                        android:paddingTop="8dp"
+                        android:paddingBottom="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:paddingLeft="16dp"
+                        android:paddingRight="16dp"
+                        android:lineSpacingMultiplier="1.2"
+                        android:gravity="center_vertical"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                        android:textSize="18sp"
+                        android:textColor="?android:attr/textColorPrimary" />
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp">
+
                     <TextView
                         android:text="剩餘名額"
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:textSize="15sp"/>
+                        android:minHeight="50dp"
+                        android:gravity="center_vertical"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                        android:textColor="?android:attr/textColorSecondary" />
                     <TextView
                         android:id="@+id/tvVacancy"
-                        android:text="15"
-                        android:layout_width="0dp"
+                        android:text="258"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:textSize="15sp"/>
+                        android:minHeight="50dp"
+                        android:paddingTop="8dp"
+                        android:paddingBottom="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:paddingLeft="16dp"
+                        android:paddingRight="16dp"
+                        android:lineSpacingMultiplier="1.2"
+                        android:gravity="center_vertical"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                        android:textSize="18sp"
+                        android:textColor="?android:attr/textColorPrimary" />
+
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
