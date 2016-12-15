@@ -28,6 +28,6 @@ public class Values {
     // 報到
     public static String place;
     public static ArrayList checkIn = new ArrayList();
-    public static HashMap start_time = new HashMap();
+    public static HashMap date_time = new HashMap();
     public static HashMap ifPush = new HashMap();
 }

@@ -40,6 +40,10 @@ import io.onebeacon.api.BeaconsMonitor;
 import io.onebeacon.api.Rangeable;
 import io.onebeacon.api.spec.EddystoneUIDBeacon;
 
+import static android.app.Notification.DEFAULT_LIGHTS;
+import static android.app.Notification.DEFAULT_SOUND;
+import static android.app.Notification.DEFAULT_VIBRATE;
+
 /** Example subclass for a BeaconsMonitor **/
 class MyBeaconsMonitor extends BeaconsMonitor {
 
@@ -135,7 +139,7 @@ class MyBeaconsMonitor extends BeaconsMonitor {
     }
 
     public void ifCanCheckIn() {
-        Map map = (Map) Values.start_time;
+        Map map = (Map) Values.date_time;
 
         // 計算演講是否進行中
         SimpleDateFormat formatDateTime = new SimpleDateFormat("yyyy-MM-dd HH:mm");
@@ -143,22 +147,31 @@ class MyBeaconsMonitor extends BeaconsMonitor {
         String currentDateTime = formatDateTime.format(getDate);
 
         for (Object key : map.keySet()) {
-            System.out.println(key + " : " + map.get(key));
+            // 取得每場議程開始、結束時間
+            String parse_date_time = (String) map.get(key);
+            String start_date = parse_date_time.substring(0, 10);
+            String start_time = parse_date_time.substring(0, 16);
+            String end_time = start_date.concat(" ").concat(parse_date_time.substring(parse_date_time.lastIndexOf('-') + 1));
+            log("議程開始"+start_time+", 議程結束"+end_time);
             try {
                 Date currentDateType = formatDateTime.parse(currentDateTime);
-                Date startDateType   = formatDateTime.parse((String) map.get(key));
+                Date startDateType   = formatDateTime.parse(start_time);
+                Date endDateType     = formatDateTime.parse(end_time);
 
                 Long currentUnixType = currentDateType.getTime();
                 Long startUnixType   = startDateType.getTime();
+                Long endUnixType     = endDateType.getTime();
 
                 // 計算到分鐘差
-                boolean ifStart = ((currentUnixType - startUnixType) / 1000 * 60) > 0;
+                boolean ifStart = ((currentUnixType - startUnixType)   / 1000 * 60) > 0; // 已開始
+                boolean ifEnd   = ((endUnixType     - currentUnixType) / 1000 * 60) > 0; // 還沒結束
 
-                if (ifStart) {
-                    if (!ifPush.contains(map.get(key))) {
-                        ifPush.add(map.get(key));
-                        Log.d("提醒", String.valueOf(map.get(key)));
-                        pushNotification("提醒：開始簽到", key + "已開始簽到", 1);
+                if (ifStart && ifEnd) {
+                    log("提醒簽到");
+                    if (!ifPush.contains(parse_date_time)) {
+                        Log.d("提醒", parse_date_time);
+                        pushNotification("提醒：開始簽到", "議程：" + key + " 已開始簽到", 1);
+                        ifPush.add(parse_date_time);
                     }
                 }
             } catch (ParseException e) {
@@ -188,6 +201,7 @@ class MyBeaconsMonitor extends BeaconsMonitor {
         Notification notification = mBuilder
             .setAutoCancel(true)
             .setOnlyAlertOnce(true)
+            .setDefaults(DEFAULT_SOUND | DEFAULT_VIBRATE | DEFAULT_LIGHTS)
             .setContentIntent(resultPendingIntent).build();
         NotificationManagerCompat.from(myBeaconsMonitor).notify(id, notification);
     }

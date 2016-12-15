@@ -40,6 +40,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static com.androidapp.beconnect.beconnect.Values.place;
+
 /**
  * Created by mitour on 2016/12/12.
  */
@@ -186,19 +188,23 @@ public class Agendas extends AppCompatActivity {
         }
     }
 
-    public boolean ifCanCheckIn(String start_at_date, String start_at_time, String end_at_time, String indoor_level) {
-        boolean TF = false;
-        boolean speechIsOn = false;
-        boolean ifRightPlace = false;
-
+    public boolean ifRightPlace(String indoor_level) {
         // 確認是否是對的地點
-        if (indoor_level.equals(Values.place)) {
+        boolean ifRightPlace = false;
+        if (indoor_level.equals(place)) {
+            Log.d("status", "right place");
             ifRightPlace = true;
         } else {
+            Log.d("status", "wrong place");
             ifRightPlace = false;
         }
+        return ifRightPlace;
+    }
 
+    public String ifRightTime(String start_at_date, String start_at_time, String end_at_time) {
         // 計算演講是否進行中
+        String ifRightTime = "";
+
         SimpleDateFormat formatDateTime = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         Date getDate = new Date();
         String currentDateTime = formatDateTime.format(getDate);
@@ -219,25 +225,22 @@ public class Agendas extends AppCompatActivity {
             boolean ifEnd   = ((endUnixType     - currentUnixType) / 1000 * 60) > 0; // 還沒結束
 
             if (ifStart && ifEnd) {
-                speechIsOn = true;
-            } else {
-                speechIsOn = false;
+                Log.d("status", "right time");
+                ifRightTime = "right_time";
+            } else if (!ifEnd) {
+                // 已結束
+                Log.d("status", "已結束");
+                ifRightTime = "end";
+            } else if (!ifStart) {
+                // 未開始
+                Log.d("status", "未開始");
+                ifRightTime = "not_yet";
             }
         } catch (ParseException e) {
             e.printStackTrace();
         }
 
-        if (ifRightPlace && speechIsOn) {
-            TF = true;
-        } else if (ifRightPlace && !speechIsOn) {
-            // wrong timing
-        } else if (!ifRightPlace && speechIsOn) {
-            // wrong place
-        } else {
-            TF = false;
-        }
-
-        return TF;
+        return ifRightTime;
     }
 
     // 自定義 ListView (http://huli.logdown.com/posts/280137-android-custom-listview)
@@ -346,6 +349,7 @@ public class Agendas extends AppCompatActivity {
             holder.tvIndoor_level.setText(items.getIndoor_level());
             holder.tvSpeakerName.setText(items.getSpeaker_name());
             holder.tvSpeakerDescription.setText(items.getSpeaker_description());
+            holder.tvStatus.setId(Integer.parseInt("1"+items.getId()));
             holder.bCheckIn.setId(Integer.parseInt(items.getId()));
 
             imageLoader = CustomVolleyRequest.getInstance(context).getImageLoader();
@@ -355,66 +359,83 @@ public class Agendas extends AppCompatActivity {
             final String EventAgendaId = getIntent().getStringExtra("EXTRA_SESSION_ID").concat("-").concat(items.getId());
 
             if (Values.checkIn.contains(EventAgendaId)) {
-                holder.bCheckIn.setText("已簽到");
+                holder.tvStatus.setText("已簽到");
+                holder.bCheckIn.setVisibility(View.GONE);
+                holder.bCheckIn.setTextColor(getResources().getColorStateList(R.color.common_signin_btn_light_text_disabled));
             } else {
+                if (ifRightTime(items.start_at_date, items.getStart_at_time(), items.getEnd_at_time()).equals("right_time")) {
+                    // 時間對
+                    if (ifRightPlace(items.getIndoor_level())) {
+                        // 地點對
+                        holder.bCheckIn.setVisibility(View.VISIBLE);
+                        holder.tvStatus.setText("已開始入場");
+                        if (session.isLoggedIn()) {
+                            url_Check_in_event_agendas = getResources().getString(R.string.url_Check_in_event_agendas);
+                            url_Check_in_event_agendas = String.format(url_Check_in_event_agendas, items.getId());
+                            HashMap<String, String> user = session.getUserDetails();
 
-                if (ifCanCheckIn(items.getStart_at_date(), items.getStart_at_time(), items.getEnd_at_time(), items.getIndoor_level())) {
-                    holder.bCheckIn.setText("可以簽到");
-                    if (session.isLoggedIn()) {
-                        url_Check_in_event_agendas = getResources().getString(R.string.url_Check_in_event_agendas);
-                        url_Check_in_event_agendas = String.format(url_Check_in_event_agendas, items.getId());
-                        HashMap<String, String> user = session.getUserDetails();
+                            final String uid = user.get(SessionManager.KEY_UID);
+                            final String access_token = user.get(SessionManager.KEY_ACCESS_TOKEN);
+                            final String client = user.get(SessionManager.KEY_CLIENT);
 
-                        final String uid = user.get(SessionManager.KEY_UID);
-                        final String access_token = user.get(SessionManager.KEY_ACCESS_TOKEN);
-                        final String client = user.get(SessionManager.KEY_CLIENT);
+                            holder.bCheckIn.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    StringRequest sr = new StringRequest(Request.Method.POST, url_Check_in_event_agendas, new Response.Listener<String>() {
+                                        @Override
+                                        public void onResponse(String response) {
+                                            Toast.makeText(Agendas.this, "已簽到 enjoy it!", Toast.LENGTH_LONG).show();
+                                            Values.checkIn.add(EventAgendaId);
 
-                        holder.bCheckIn.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                StringRequest sr = new StringRequest(Request.Method.POST, url_Check_in_event_agendas, new Response.Listener<String>() {
-                                    @Override
-                                    public void onResponse(String response) {
-                                        Toast.makeText(Agendas.this, "已簽到 enjoy it!", Toast.LENGTH_LONG).show();
-                                        Values.checkIn.add(EventAgendaId);
-
-                                        Intent intent = new Intent(Agendas.this, Events.class);
-                                        Agendas.this.startActivity(intent);
-                                        finish();
-                                    }
-                                }, new Response.ErrorListener() {
-                                    @Override
-                                    public void onErrorResponse(VolleyError error) {
-                                        Log.d("error when checkin", error.toString());
-                                    }
-                                }) {
-                                    @Override
-                                    public Map<String, String> getHeaders() {
-                                        Map<String, String> params = new HashMap<>();
-                                        params.put("access-token", access_token);
-                                        params.put("uid", uid);
-                                        params.put("client", client);
-                                        return params;
-                                    }
-                                };
-                                AppController.getInstance().addToRequestQueue(sr, tag_string_req);
-                            }
-                        });
+                                            Intent intent = new Intent(Agendas.this, Events.class);
+                                            Agendas.this.startActivity(intent);
+                                            finish();
+                                        }
+                                    }, new Response.ErrorListener() {
+                                        @Override
+                                        public void onErrorResponse(VolleyError error) {
+                                            Log.d("error when checkin", error.toString());
+                                        }
+                                    }) {
+                                        @Override
+                                        public Map<String, String> getHeaders() {
+                                            Map<String, String> params = new HashMap<>();
+                                            params.put("access-token", access_token);
+                                            params.put("uid", uid);
+                                            params.put("client", client);
+                                            return params;
+                                        }
+                                    };
+                                    AppController.getInstance().addToRequestQueue(sr, tag_string_req);
+                                }
+                            });
+                        } else {
+                            holder.bCheckIn.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    Toast.makeText(Agendas.this, "請先登入", Toast.LENGTH_LONG).show();
+                                    Intent Loginintent = new Intent(Agendas.this, LoginActivity.class);
+                                    Agendas.this.startActivity(Loginintent);
+                                    finish();
+                                }
+                            });
+                        }
                     } else {
-                        holder.bCheckIn.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                Toast.makeText(Agendas.this, "請先登入", Toast.LENGTH_LONG).show();
-                                //                            Snackbar.make(container, "請先登入", Snackbar.LENGTH_LONG).setAction("前往登入", new View.OnClickListener() {
-                                //                                @Override
-                                //                                public void onClick(View v) {
-                                //                                    Intent loginIntent = new Intent(Agendas.this, LoginActivity.class);
-                                //                                    Agendas.this.startActivity(loginIntent);
-                                //                                }
-                                //                            }).show();
-                            }
-                        });
+                        // 地點錯
+                        holder.tvStatus.setText("已開始入場，請到" + items.indoor_level + "進行簽到");
+                        holder.bCheckIn.setVisibility(View.GONE);
+                        holder.bCheckIn.setTextColor(getResources().getColorStateList(R.color.common_signin_btn_light_text_disabled));
                     }
+                } else if (ifRightTime(items.start_at_date, items.getStart_at_time(), items.getEnd_at_time()).equals("end")) {
+                    // 已結束
+                    holder.tvStatus.setText("議程已結束");
+                    holder.bCheckIn.setVisibility(View.GONE);
+                    holder.bCheckIn.setTextColor(getResources().getColorStateList(R.color.common_signin_btn_light_text_disabled));
+                } else if (ifRightTime(items.start_at_date, items.getStart_at_time(), items.getEnd_at_time()).equals("not_yet")) {
+                    // 未開始
+                    holder.tvStatus.setText("議程尚未開始入場");
+                    holder.bCheckIn.setVisibility(View.GONE);
+                    holder.bCheckIn.setTextColor(getResources().getColorStateList(R.color.common_signin_btn_light_text_disabled));
                 }
             }
         }
@@ -433,6 +454,7 @@ public class Agendas extends AppCompatActivity {
             public TextView tvSpeakerName;
             public TextView tvSpeakerDescription;
             public NetworkImageView ivSpeakerImage;
+            public TextView tvStatus;
             public Button bCheckIn;
 
             public ViewHolder(View itemView){
@@ -445,6 +467,7 @@ public class Agendas extends AppCompatActivity {
                 tvSpeakerName = (TextView) itemView.findViewById(R.id.tvSpeakerName);
                 tvSpeakerDescription = (TextView) itemView.findViewById(R.id.tvSpeakerDescription);
                 ivSpeakerImage = (NetworkImageView) itemView.findViewById(R.id.ivSpeakerImage);
+                tvStatus = (TextView) itemView.findViewById(R.id.tvStatus);
                 bCheckIn = (Button) itemView.findViewById(R.id.bCheckIn);
                 itemView.setOnClickListener(this);
             }

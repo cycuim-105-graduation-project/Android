@@ -28,7 +28,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -179,9 +178,11 @@ public class Events extends AppCompatActivity implements ServiceConnection {
                                                     name = timeObject.getString("name");
                                                     start_at_date = timeObject.getString("start_at_date");
                                                     start_at_time = timeObject.getString("start_at_time");
-                                                    SimpleDateFormat formatDateTime = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-                                                    String startAtDateTime = start_at_date.concat(" ").concat(start_at_time);
-                                                    Values.start_time.put(name, startAtDateTime);
+                                                    end_at_time = timeObject.getString("end_at_time");
+
+                                                    // 格式 yyyy-mm-dd hh:mm-hh:mm
+                                                    String DateTime = start_at_date.concat(" ").concat(start_at_time).concat("-").concat(end_at_time);
+                                                    Values.date_time.put(name, DateTime);
                                                 }
                                             }
                                         }
