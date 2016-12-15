@@ -7,8 +7,8 @@
             android:id="@+id/mLogout" />
         <item android:title="Profile"
             android:id="@+id/mProfile" />
-        <item android:title="Businesscard"
-            android:id="@+id/mBusinessCard" />
+        <!--<item android:title="Businesscard"-->
+            <!--android:id="@+id/mBusinessCard" />-->
         <item android:title="Events"
             android:id="@+id/mEvents" />
         <!--<item android:title="Ticket"-->

@@ -222,7 +222,7 @@ public class ProfileActivity extends AppCompatActivity {
             menu.getItem(2).setVisible(false);
             menu.getItem(3).setVisible(false);
             menu.getItem(4).setVisible(false);
-            menu.getItem(5).setVisible(false);
+//            menu.getItem(5).setVisible(false);
 //            menu.getItem(6).setVisible(false);
         }
 
@@ -277,10 +277,10 @@ public class ProfileActivity extends AppCompatActivity {
                     Intent Profileintent = new Intent(this, ProfileActivity.class);
                     this.startActivity(Profileintent);
                     break;
-                case R.id.mBusinessCard:
-                    Intent BusinessCardintent = new Intent(this, BusinessCard.class);
-                    this.startActivity(BusinessCardintent);
-                    break;
+//                case R.id.mBusinessCard:
+//                    Intent BusinessCardintent = new Intent(this, BusinessCard.class);
+//                    this.startActivity(BusinessCardintent);
+//                    break;
                 case R.id.mEvents:
                     Intent Eventsintent = new Intent(this, Events.class);
                     this.startActivity(Eventsintent);
